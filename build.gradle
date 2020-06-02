@@ -1,0 +1,44 @@
+plugins {
+    id 'org.springframework.boot' version '2.3.0.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'java'
+}
+
+group = 'com.youxinger'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'junit:junit:4.12'
+    implementation 'org.apache.commons:commons-lang3:3.4'
+    implementation 'ch.qos.logback:logback-classic:1.2.3'
+    implementation 'ch.qos.logback:logback-core:1.2.3'
+    implementation 'org.slf4j:slf4j-api:1.7.21'
+    implementation 'org.seleniumhq.selenium:selenium-java:3.4.0'
+    implementation ('com.alibaba:fastjson:1.2.4')
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    // cucumber
+    testImplementation('info.cukes:cucumber-jvm:1.2.4')
+    testImplementation('info.cukes:cucumber-core:1.2.4')
+    testImplementation('info.cukes:cucumber-java:1.2.4')
+    testImplementation('info.cukes:cucumber-junit:1.2.4')
+    testImplementation('info.cukes:cucumber-spring:1.2.4')
+    implementation('io.rest-assured:rest-assured:4.0.0')
+    implementation('io.rest-assured:json-path:4.0.0')
+    implementation('io.rest-assured:json-schema-validator:4.0.0')
+    implementation('io.rest-assured:xml-path:4.0.0')
+
+    testImplementation('org.testng:testng:6.14.3')
+    testImplementation('org.hamcrest:java-hamcrest:2.0.0.0')
+}
+
+test {
+    useJUnitPlatform()
+}
