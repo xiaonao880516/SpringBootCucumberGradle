@@ -16,7 +16,7 @@ public class PlatformVerify extends AbstractVerify<Platform, PlatformVerifyData>
     private PlatformService platformService = CustomManageObjUtil.getBean(PlatformService.class);
 
     @Override
-    protected void verifyDataSelf(PlatformVerifyData expectedData) {
+    protected void verifyDataSelf() {
         Assert.assertEquals("验证平台业绩失败", expectedData.getPerformance(), postVerifyData.getPerformance() - preVerifyData.getPerformance(), 2.0);
     }
 

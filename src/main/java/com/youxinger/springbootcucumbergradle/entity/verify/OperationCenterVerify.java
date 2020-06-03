@@ -16,7 +16,7 @@ public class OperationCenterVerify extends AbstractVerify<OperationCenter, Opera
     private OperationCenterService operationCenterService = CustomManageObjUtil.getBean(OperationCenterService.class);
 
     @Override
-    protected void verifyDataSelf(OperationCenterVerifyData expectedData) {
+    protected void verifyDataSelf() {
         Assert.assertEquals("验证运营中心业绩失败", expectedData.getSalesSum(), postVerifyData.getSalesSum() - preVerifyData.getSalesSum(), 2.0);
     }
 

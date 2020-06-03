@@ -8,13 +8,13 @@ import java.util.List;
  * 2020/5/27 17:16
  * @version 1.0
  */
-public class ProvinceOperationCenter extends BaseEntity{
+public class ProvinceOperationCenter extends BaseEntity {
 
     private String name;  // 省运营中心名称
     private String number;  //省运营中心编号
     private List<OperationCenter> operationCenterList = new ArrayList<>();
 
-    public ProvinceOperationCenter(String name, String number){
+    public ProvinceOperationCenter(String name, String number) {
         this.name = name;
         this.number = number;
     }
@@ -50,5 +50,19 @@ public class ProvinceOperationCenter extends BaseEntity{
                 ", number='" + number + '\'' +
                 ", operationCenterList=" + operationCenterList +
                 '}';
+    }
+
+    @Override
+    protected void childUpdatePreVerifyData() {
+        for (OperationCenter operationCenter : operationCenterList) {
+            operationCenter.updatePreVerifyData();
+        }
+    }
+
+    @Override
+    protected void childUpdatePostVerifyData() {
+        for (OperationCenter operationCenter : operationCenterList) {
+            operationCenter.updatePostVerifyData();
+        }
     }
 }

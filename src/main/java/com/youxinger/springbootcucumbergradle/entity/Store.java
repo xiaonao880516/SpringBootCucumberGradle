@@ -10,7 +10,7 @@ import java.util.List;
  * 2020/5/27 17:17
  * @version 1.0
  */
-public class Store extends BaseEntity{
+public class Store extends BaseEntity {
 
     private String name;//门店名称
     private String number;//门店编号
@@ -18,7 +18,7 @@ public class Store extends BaseEntity{
     private List<Platform> platformList = new ArrayList<>();
     private List<Employee> employeeList = new ArrayList<>();
 
-    public Store(String name, String number){
+    public Store(String name, String number) {
         this.name = name;
         this.number = number;
         this.repository = new Repository(name, Constants.PRODUCTS_BARCODE);
@@ -73,5 +73,27 @@ public class Store extends BaseEntity{
                 ", platformList=" + platformList +
                 ", employeeList=" + employeeList +
                 '}';
+    }
+
+    @Override
+    protected void childUpdatePreVerifyData() {
+        for (Platform platform : platformList) {
+            platform.updatePreVerifyData();
+        }
+        for (Employee employee : employeeList) {
+            employee.updatePreVerifyData();
+        }
+        repository.updatePreVerifyData();
+    }
+
+    @Override
+    protected void childUpdatePostVerifyData() {
+        for (Platform platform : platformList) {
+            platform.updatePostVerifyData();
+        }
+        for (Employee employee : employeeList) {
+            employee.updatePostVerifyData();
+        }
+        repository.updatePostVerifyData();
     }
 }

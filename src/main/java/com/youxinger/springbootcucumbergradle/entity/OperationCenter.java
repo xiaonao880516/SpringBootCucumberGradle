@@ -51,4 +51,18 @@ public class OperationCenter extends BaseEntity{
                 ", storeList=" + storeList +
                 '}';
     }
+
+    @Override
+    protected void childUpdatePreVerifyData() {
+        for(Store store : storeList){
+            store.updatePreVerifyData();
+        }
+    }
+
+    @Override
+    protected void childUpdatePostVerifyData() {
+        for(Store store : storeList){
+            store.updatePostVerifyData();
+        }
+    }
 }

@@ -18,24 +18,34 @@ public abstract class AbstractVerify<Entity extends BaseEntity, Data> implements
      * 操作之后的数据信息
      */
     protected Data postVerifyData;
+    /**
+     * 期待值集合
+     */
+    protected Data expectedData;
 
     @Override
-    public void verifyData(Data expectedData) {
+    public void setExpectedData(Data expectedData) {
+        this.expectedData = expectedData;
+    }
+
+    @Override
+    public void verifyData() {
+        if (expectedData == null) {
+            //无期待值，不需要验证
+            return;
+        }
         if (preVerifyData == null) {
             Assert.fail("无操作前值");
         }
         if (postVerifyData == null) {
             Assert.fail("无操作后值");
         }
-        if (expectedData == null) {
-            Assert.fail("无期待值，无法验证");
-        }
-        verifyDataSelf(expectedData);
+        verifyDataSelf();
     }
 
     /**
      * 具体的验证方法
      */
-    protected abstract void verifyDataSelf(Data expectedData);
+    protected abstract void verifyDataSelf();
 
 }

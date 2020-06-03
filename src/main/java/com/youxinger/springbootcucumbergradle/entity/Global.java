@@ -10,14 +10,14 @@ import java.util.List;
  * 2020/5/27 17:18
  * @version 1.0
  */
-public class Global extends BaseEntity{
+public class Global extends BaseEntity {
 
     //所有省运营中心
     private List<ProvinceOperationCenter> provinceOperationCenterList = new ArrayList<>();
     //总仓
     private Repository repository;
 
-    public Global(){
+    public Global() {
         this.repository = new Repository("总仓", Constants.PRODUCTS_BARCODE);
     }
 
@@ -37,6 +37,21 @@ public class Global extends BaseEntity{
         this.repository = repository;
     }
 
+    @Override
+    protected void childUpdatePreVerifyData() {
+        for (ProvinceOperationCenter provinceOperationCenter : provinceOperationCenterList) {
+            provinceOperationCenter.updatePreVerifyData();
+        }
+        repository.updatePreVerifyData();
+    }
+
+    @Override
+    protected void childUpdatePostVerifyData() {
+        for (ProvinceOperationCenter provinceOperationCenter : provinceOperationCenterList) {
+            provinceOperationCenter.updatePostVerifyData();
+        }
+        repository.updatePostVerifyData();
+    }
 
     @Override
     public String toString() {

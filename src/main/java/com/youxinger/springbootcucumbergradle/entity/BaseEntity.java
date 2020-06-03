@@ -41,9 +41,15 @@ public class BaseEntity<Data> {
 
     }
 
-    public void verifyData(Data expectedData) {
+    public void setExpectedData(Data expectedData) {
         if (verify != null) {
-            verify.verifyData(expectedData);
+            verify.setExpectedData(expectedData);
+        }
+    }
+
+    public void verifyData() {
+        if (verify != null) {
+            verify.verifyData();
         }
         childVerifyData();
     }

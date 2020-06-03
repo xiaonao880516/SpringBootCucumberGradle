@@ -29,7 +29,7 @@ public class CustomerVerify extends AbstractVerify<Customer, CustomerVerifyData>
     }
 
     @Override
-    protected void verifyDataSelf(CustomerVerifyData expectedData) {
+    protected void verifyDataSelf() {
         Assert.assertEquals("验证会员余额失败", expectedData.getBalance(), postVerifyData.getBalance() - preVerifyData.getBalance(), 2.0);
         Assert.assertEquals("验证会员消费额失败", expectedData.getConsumption(), postVerifyData.getConsumption() - preVerifyData.getConsumption(), 2.0);
         Assert.assertEquals("验证会员积分失败", expectedData.getSwapScore(), postVerifyData.getSwapScore() - preVerifyData.getSwapScore(), 2.0);

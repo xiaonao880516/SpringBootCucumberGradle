@@ -17,7 +17,7 @@ public class RepositoryVerify extends AbstractVerify<Repository, RepositoryVerif
     private RepositoryService repositoryService = CustomManageObjUtil.getBean(RepositoryService.class);
 
     @Override
-    protected void verifyDataSelf(RepositoryVerifyData expectedData) {
+    protected void verifyDataSelf() {
         if (expectedData != null && expectedData.getProductVerifyDataMap() != null) {
             for (String barcode : expectedData.getProductVerifyDataMap().keySet()) {
                 ProductVerifyData expected = expectedData.getProductVerifyDataMap().get(barcode);

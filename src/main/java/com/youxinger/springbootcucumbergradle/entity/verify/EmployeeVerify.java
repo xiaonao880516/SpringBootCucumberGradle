@@ -16,7 +16,7 @@ public class EmployeeVerify extends AbstractVerify<Employee, EmployeeVerifyData>
     private EmployeeService employeeService = CustomManageObjUtil.getBean(EmployeeService.class);
 
     @Override
-    protected void verifyDataSelf(EmployeeVerifyData expectedData) {
+    protected void verifyDataSelf() {
         Assert.assertEquals("验证员工业绩失败", expectedData.getPerformance(), postVerifyData.getPerformance() - preVerifyData.getPerformance(), 2.0);
     }
 

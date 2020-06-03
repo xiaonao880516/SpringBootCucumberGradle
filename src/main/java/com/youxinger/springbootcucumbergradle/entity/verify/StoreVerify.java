@@ -16,7 +16,7 @@ public class StoreVerify extends AbstractVerify<Store, StoreVerifyData> {
     private StoreService storeService = CustomManageObjUtil.getBean(StoreService.class);
 
     @Override
-    protected void verifyDataSelf(StoreVerifyData expectedData) {
+    protected void verifyDataSelf() {
         Assert.assertEquals("验证门店业绩失败", expectedData.getSalesSum(), postVerifyData.getSalesSum() - preVerifyData.getSalesSum(), 2.0);
     }
 

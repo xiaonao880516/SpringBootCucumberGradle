@@ -29,7 +29,7 @@ public class CustomerSteps extends BaseSteps {
     private CustomerService customerService;
 
 
-    @假设("随机创建姓名为([^\"]*)的客户")
+    @假设("随机创建姓名为([^\"]+)的客户")
     public void customerCreateByName(String name) {
         logger.debug("customerCreate, name={}", name);
         Customer customer = new Customer(name, RandomValue.getTel());
@@ -41,7 +41,7 @@ public class CustomerSteps extends BaseSteps {
         customer.updatePreVerifyData();
     }
 
-    @当("^该客户充值(\\d+)元$")
+    @当("^客户充值(\\d+)元$")
     public void customerRecharge(int money) throws Throwable {
         logger.debug("customerCreate, money={}", money);
         for (String customerName : dataManager.getCustomerMap().keySet()) {
@@ -49,7 +49,7 @@ public class CustomerSteps extends BaseSteps {
         }
     }
 
-    @当("^客户([^\"]*)充值(\\d+)元$")
+    @当("^客户([^\"]+)充值(\\d+)元$")
     public void customerRechargeByCustomerName(String customerName, int money) throws Throwable {
         Customer customer = dataManager.getCustomerByName(customerName);
         Employee employee = dataManager.getEmployeeById(Constants.EMPLOYEE_ID);
@@ -57,17 +57,17 @@ public class CustomerSteps extends BaseSteps {
         customer.updatePostVerifyData();
     }
 
-    @那么("^该客户的卡级别为([^\"]*),积分增加(\\d+),消费额增加(\\d+)元,余额增加(\\d+)元")
+    @那么("^预期客户的卡级别为([^\"]+),积分增加(\\d+),消费额增加(\\d+)元,余额增加(\\d+)元")
     public void customerDataVerify(String cardLevel, int swapScore, int consumption, int balance) throws Throwable {
         for (String customerName : dataManager.getCustomerMap().keySet()) {
             customerDataVerifyByCustomerName(customerName, cardLevel, swapScore, consumption, balance);
         }
     }
 
-    @那么("^客户([^\"]*)的卡级别为([^\"]*),积分增加(\\d+),消费额增加(\\d+)元,余额增加(\\d+)元")
+    @那么("^预期客户([^\"]+)的卡级别为([^\"]+),积分增加(\\d+),消费额增加(\\d+)元,余额增加(\\d+)元")
     public void customerDataVerifyByCustomerName(String customerName, String cardLevel, int swapScore, int consumption, int balance) throws Throwable {
         CustomerVerifyData expectedData = new CustomerVerifyData(consumption, swapScore, CardUtil.getCardLevel(cardLevel), balance);
         Customer customer = dataManager.getCustomerByName(customerName);
-        customer.verifyData(expectedData);
+        customer.setExpectedData(expectedData);
     }
 }

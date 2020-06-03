@@ -16,7 +16,7 @@ public class ProvinceOperationCenterVerify extends AbstractVerify<ProvinceOperat
     private ProvinceOperationCenterService provinceOperationCenterService = CustomManageObjUtil.getBean(ProvinceOperationCenterService.class);
 
     @Override
-    protected void verifyDataSelf(ProvinceOperationCenterVerifyData expectedData) {
+    protected void verifyDataSelf() {
         Assert.assertEquals("验证省运营中心业绩失败", expectedData.getSalesSum(), postVerifyData.getSalesSum() - preVerifyData.getSalesSum(), 2.0);
     }
 

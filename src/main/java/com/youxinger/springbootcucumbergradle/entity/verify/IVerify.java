@@ -24,11 +24,14 @@ public interface IVerify<Entity extends BaseEntity, Data> {
      */
     void updatePostVerifyData(Entity entity);
 
+    /**
+     * 设置期待值
+     * @param expectedData
+     */
+    void setExpectedData(Data expectedData);
 
     /**
      * 数据验证的具体实现方法
-     *
-     * @param expectedData 期待值
      */
-    void verifyData(Data expectedData);
+    void verifyData();
 }

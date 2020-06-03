@@ -4,9 +4,11 @@ import com.youxinger.springbootcucumbergradle.entity.*;
 import com.youxinger.springbootcucumbergradle.service.EmployeeService;
 import com.youxinger.springbootcucumbergradle.service.SystemUserService;
 import com.youxinger.springbootcucumbergradle.utils.Constants;
+import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.zh_cn.假设;
+import cucumber.api.java.zh_cn.那么;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -57,7 +59,15 @@ public class GlobalSteps extends BaseSteps {
         foregroundLogin();
 
         logger.debug("initData, global={}", global);
+    }
 
+    @那么("^验证预期值正常$")
+    public void verifyData() throws Throwable {
+
+        dataManager.getGlobal().verifyData();
+        for (Customer customer : dataManager.getCustomerMap().values()) {
+            customer.verifyData();
+        }
     }
 
     /**

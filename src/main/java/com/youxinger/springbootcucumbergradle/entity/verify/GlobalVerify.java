@@ -16,7 +16,7 @@ public class GlobalVerify extends AbstractVerify<Global, GlobalVerifyData>{
     private GlobalService globalService = CustomManageObjUtil.getBean(GlobalService.class);
 
     @Override
-    protected void verifyDataSelf(GlobalVerifyData expectedData) {
+    protected void verifyDataSelf() {
         Assert.assertEquals("验证总览业绩失败", expectedData.getSalesSum(), postVerifyData.getSalesSum() - preVerifyData.getSalesSum(), 2.0);
     }
 
