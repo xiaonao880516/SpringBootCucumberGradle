@@ -36,7 +36,6 @@ public class Customer extends BaseEntity{
         this.city = "北京";
         this.province = "北京市";
         this.consignee = name;
-        this.verify = new CustomerVerify();
     }
 
 

@@ -1,10 +1,7 @@
 package com.youxinger.springbootcucumbergradle.entity.verify;
 
-import com.youxinger.springbootcucumbergradle.entity.OperationCenter;
 import com.youxinger.springbootcucumbergradle.entity.ProvinceOperationCenter;
-import com.youxinger.springbootcucumbergradle.entity.verifydata.OperationCenterVerifyData;
 import com.youxinger.springbootcucumbergradle.entity.verifydata.ProvinceOperationCenterVerifyData;
-import com.youxinger.springbootcucumbergradle.service.OperationCenterService;
 import com.youxinger.springbootcucumbergradle.service.ProvinceOperationCenterService;
 import com.youxinger.springbootcucumbergradle.utils.CustomManageObjUtil;
 import org.junit.Assert;

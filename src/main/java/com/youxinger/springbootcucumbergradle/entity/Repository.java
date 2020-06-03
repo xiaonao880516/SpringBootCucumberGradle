@@ -3,6 +3,7 @@ package com.youxinger.springbootcucumbergradle.entity;
 import com.youxinger.springbootcucumbergradle.entity.verifydata.ProductVerifyData;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -13,15 +14,11 @@ import java.util.List;
 public class Repository extends BaseEntity{
 
     private String name;//仓库名称
-    private List<ProductVerifyData> productVerifyDataList = new ArrayList<>();
+    private String[] productsBarcode;//仓库的条码列表
 
     public Repository(String name, String[] productsBarcode) {
         this.name = name;
-        if (productsBarcode != null && productsBarcode.length > 0) {
-            for (String barcode : productsBarcode) {
-                productVerifyDataList.add(new ProductVerifyData(barcode));
-            }
-        }
+        this.productsBarcode = productsBarcode;
     }
 
     public String getName() {
@@ -32,19 +29,19 @@ public class Repository extends BaseEntity{
         this.name = name;
     }
 
-    public List<ProductVerifyData> getProductVerifyDataList() {
-        return productVerifyDataList;
+    public String[] getProductsBarcode() {
+        return productsBarcode;
     }
 
-    public void setProductVerifyDataList(List<ProductVerifyData> productVerifyDataList) {
-        this.productVerifyDataList = productVerifyDataList;
+    public void setProductsBarcode(String[] productsBarcode) {
+        this.productsBarcode = productsBarcode;
     }
 
     @Override
     public String toString() {
         return "Repository{" +
                 "name='" + name + '\'' +
-                ", productVerifyDataList=" + productVerifyDataList +
+                ", productsBarcode=" + Arrays.toString(productsBarcode) +
                 '}';
     }
 }

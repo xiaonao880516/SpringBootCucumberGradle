@@ -1,7 +1,5 @@
 package com.youxinger.springbootcucumbergradle.entity;
 
-import com.youxinger.springbootcucumbergradle.entity.verify.GlobalVerify;
-import com.youxinger.springbootcucumbergradle.entity.verifydata.GlobalVerifyData;
 import com.youxinger.springbootcucumbergradle.utils.Constants;
 
 import java.util.ArrayList;
@@ -18,13 +16,9 @@ public class Global extends BaseEntity{
     private List<ProvinceOperationCenter> provinceOperationCenterList = new ArrayList<>();
     //总仓
     private Repository repository;
-    private GlobalVerifyData preVerifyData;
-    private GlobalVerifyData postVerifyData;
-    private GlobalVerifyData expectedData;
 
     public Global(){
         this.repository = new Repository("总仓", Constants.PRODUCTS_BARCODE);
-        this.verify = new GlobalVerify();
     }
 
     public List<ProvinceOperationCenter> getProvinceOperationCenterList() {
@@ -43,38 +37,12 @@ public class Global extends BaseEntity{
         this.repository = repository;
     }
 
-    public GlobalVerifyData getPreVerifyData() {
-        return preVerifyData;
-    }
-
-    public void setPreVerifyData(GlobalVerifyData preVerifyData) {
-        this.preVerifyData = preVerifyData;
-    }
-
-    public GlobalVerifyData getPostVerifyData() {
-        return postVerifyData;
-    }
-
-    public void setPostVerifyData(GlobalVerifyData postVerifyData) {
-        this.postVerifyData = postVerifyData;
-    }
-
-    public GlobalVerifyData getExpectedData() {
-        return expectedData;
-    }
-
-    public void setExpectedData(GlobalVerifyData expectedData) {
-        this.expectedData = expectedData;
-    }
 
     @Override
     public String toString() {
         return "Global{" +
                 "provinceOperationCenterList=" + provinceOperationCenterList +
                 ", repository=" + repository +
-                ", preVerifyData=" + preVerifyData +
-                ", postVerifyData=" + postVerifyData +
-                ", expectedData=" + expectedData +
                 '}';
     }
 }
