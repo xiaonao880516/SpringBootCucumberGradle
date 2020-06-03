@@ -1,6 +1,7 @@
 package com.youxinger.springbootcucumbergradle.entity.verify;
 
 import com.youxinger.springbootcucumbergradle.entity.Customer;
+import com.youxinger.springbootcucumbergradle.entity.verifydata.CustomerVerifyData;
 import com.youxinger.springbootcucumbergradle.service.CustomerService;
 import com.youxinger.springbootcucumbergradle.utils.CustomManageObjUtil;
 import org.junit.Assert;

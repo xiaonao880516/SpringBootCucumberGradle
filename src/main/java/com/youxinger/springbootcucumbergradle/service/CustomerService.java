@@ -1,12 +1,11 @@
 package com.youxinger.springbootcucumbergradle.service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.youxinger.springbootcucumbergradle.entity.SystemUser;
-import com.youxinger.springbootcucumbergradle.utils.Constants;
 import com.youxinger.springbootcucumbergradle.entity.Customer;
-import com.youxinger.springbootcucumbergradle.entity.verify.CustomerVerifyData;
 import com.youxinger.springbootcucumbergradle.entity.Employee;
 import com.youxinger.springbootcucumbergradle.entity.Platform;
+import com.youxinger.springbootcucumbergradle.entity.verifydata.CustomerVerifyData;
+import com.youxinger.springbootcucumbergradle.utils.Constants;
 import io.restassured.response.Response;
 import org.apache.http.util.TextUtils;
 import org.slf4j.Logger;

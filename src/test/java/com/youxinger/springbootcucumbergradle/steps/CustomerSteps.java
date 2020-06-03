@@ -4,7 +4,7 @@ package com.youxinger.springbootcucumbergradle.steps;
 import com.youxinger.springbootcucumbergradle.entity.Customer;
 import com.youxinger.springbootcucumbergradle.entity.Employee;
 import com.youxinger.springbootcucumbergradle.entity.Platform;
-import com.youxinger.springbootcucumbergradle.entity.verify.CustomerVerifyData;
+import com.youxinger.springbootcucumbergradle.entity.verifydata.CustomerVerifyData;
 import com.youxinger.springbootcucumbergradle.service.CustomerService;
 import com.youxinger.springbootcucumbergradle.utils.CardUtil;
 import com.youxinger.springbootcucumbergradle.utils.Constants;

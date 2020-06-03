@@ -1,5 +1,8 @@
 package com.youxinger.springbootcucumbergradle.entity;
 
+import com.youxinger.springbootcucumbergradle.entity.verify.OperationCenterVerify;
+import com.youxinger.springbootcucumbergradle.entity.verifydata.OperationCenterVerifyData;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +11,7 @@ import java.util.List;
  * 2020/5/27 17:16
  * @version 1.0
  */
-public class OperationCenter {
+public class OperationCenter extends BaseEntity{
 
     private String name;  // 运营中心名称
     private String number;  //运营中心编号
@@ -20,6 +23,7 @@ public class OperationCenter {
     public OperationCenter(String name, String number){
         this.name = name;
         this.number = number;
+        this.verify = new OperationCenterVerify();
     }
 
     public String getName() {
@@ -79,25 +83,6 @@ public class OperationCenter {
                 ", preVerifyData=" + preVerifyData +
                 ", postVerifyData=" + postVerifyData +
                 ", expectedData=" + expectedData +
-                '}';
-    }
-}
-
-class OperationCenterVerifyData {
-    private int salesSum = 0;  //运营中心销售额
-
-    public int getSalesSum() {
-        return salesSum;
-    }
-
-    public void setSalesSum(int salesSum) {
-        this.salesSum = salesSum;
-    }
-
-    @Override
-    public String toString() {
-        return "ProvinceOperationCenterVerifyData{" +
-                "salesSum=" + salesSum +
                 '}';
     }
 }

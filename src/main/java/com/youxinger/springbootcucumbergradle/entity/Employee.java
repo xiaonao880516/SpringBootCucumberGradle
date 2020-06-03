@@ -3,7 +3,7 @@ package com.youxinger.springbootcucumbergradle.entity;
 /**
  * 前台员工实体类
  */
-public class Employee {
+public class Employee extends BaseEntity{
 
     private int id;
     private String name;
@@ -14,7 +14,6 @@ public class Employee {
     private Store store = null;//员工所属门店
 
     public Employee(){
-
     }
 
     public Employee(int id, String name, String phone, String password){
@@ -90,25 +89,6 @@ public class Employee {
                 ", entered=" + entered +
                 ", tid='" + tid + '\'' +
                 ", store=" + store +
-                '}';
-    }
-}
-
-class EmployeeVerifyData {
-    private float performance = 0.0f;  //员工业绩
-
-    public float getPerformance() {
-        return performance;
-    }
-
-    public void setPerformance(float performance) {
-        this.performance = performance;
-    }
-
-    @Override
-    public String toString() {
-        return "EmployeeVerifyData{" +
-                "performance=" + performance +
                 '}';
     }
 }

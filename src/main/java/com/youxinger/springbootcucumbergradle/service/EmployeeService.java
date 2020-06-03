@@ -1,8 +1,11 @@
 package com.youxinger.springbootcucumbergradle.service;
 
-import com.youxinger.springbootcucumbergradle.utils.Constants;
 import com.youxinger.springbootcucumbergradle.entity.Employee;
+import com.youxinger.springbootcucumbergradle.entity.verifydata.EmployeeVerifyData;
+import com.youxinger.springbootcucumbergradle.utils.Constants;
 import io.restassured.response.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import static io.restassured.RestAssured.given;
@@ -10,6 +13,7 @@ import static org.junit.Assert.fail;
 
 @Service("employeeService")
 public class EmployeeService {
+    private static final Logger logger = LoggerFactory.getLogger(EmployeeService.class);
 
     /**
      * 员工登录
@@ -29,5 +33,11 @@ public class EmployeeService {
         }else{
             fail("没有有效的员工");
         }
+    }
+
+    public EmployeeVerifyData getVerifyData(Employee employee) {
+        logger.debug("getVerifyData employee={}", employee);
+        EmployeeVerifyData employeeVerifyData = new EmployeeVerifyData();
+        return employeeVerifyData;
     }
 }

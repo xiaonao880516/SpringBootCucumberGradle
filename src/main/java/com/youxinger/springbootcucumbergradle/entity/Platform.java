@@ -1,11 +1,14 @@
 package com.youxinger.springbootcucumbergradle.entity;
 
+import com.youxinger.springbootcucumbergradle.entity.verify.PlatformVerify;
+import com.youxinger.springbootcucumbergradle.entity.verifydata.PlatformVerifyData;
+
 /**
  * @author mengwei
  * 2020/5/27 17:17
  * @version 1.0
  */
-public class Platform {
+public class Platform extends BaseEntity{
 
     private int id;//平台id
     private String name;//平台名称
@@ -17,6 +20,7 @@ public class Platform {
     public Platform(int id, String name){
         this.id = id;
         this.name = name;
+        this.verify = new PlatformVerify();
     }
 
     public int getId() {
@@ -76,25 +80,6 @@ public class Platform {
                 ", preVerifyData=" + preVerifyData +
                 ", postVerifyData=" + postVerifyData +
                 ", expectedData=" + expectedData +
-                '}';
-    }
-}
-
-class PlatformVerifyData {
-    private float performance = 0.0f;  //平台业绩
-
-    public float getPerformance() {
-        return performance;
-    }
-
-    public void setPerformance(float performance) {
-        this.performance = performance;
-    }
-
-    @Override
-    public String toString() {
-        return "EmployeeVerifyData{" +
-                "performance=" + performance +
                 '}';
     }
 }

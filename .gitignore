@@ -33,3 +33,6 @@ out/
 
 ### report ###
 target/
+
+### log ###
+*.log

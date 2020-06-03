@@ -1,4 +1,4 @@
-package com.youxinger.springbootcucumbergradle.entity.verify;
+package com.youxinger.springbootcucumbergradle.entity.verifydata;
 
 import com.youxinger.springbootcucumbergradle.utils.CardUtil;
 

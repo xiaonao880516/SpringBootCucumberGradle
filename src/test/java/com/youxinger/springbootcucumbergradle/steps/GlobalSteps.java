@@ -1,10 +1,9 @@
 package com.youxinger.springbootcucumbergradle.steps;
 
-import com.youxinger.springbootcucumbergradle.utils.Constants;
 import com.youxinger.springbootcucumbergradle.entity.*;
-import com.youxinger.springbootcucumbergradle.service.DataManager;
 import com.youxinger.springbootcucumbergradle.service.EmployeeService;
 import com.youxinger.springbootcucumbergradle.service.SystemUserService;
+import com.youxinger.springbootcucumbergradle.utils.Constants;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.zh_cn.假设;
@@ -22,7 +21,7 @@ import static org.junit.Assert.assertTrue;
  * 2020/5/27 17:13
  * @version 1.0
  */
-public class GlobalSteps {
+public class GlobalSteps extends BaseSteps {
 
     private static final Logger logger = LoggerFactory.getLogger(GlobalSteps.class);
 
@@ -32,10 +31,7 @@ public class GlobalSteps {
     @Resource(name = "employeeService")
     private EmployeeService employeeService;
 
-    @Resource
-    private DataManager dataManager;
-
-    @假设("有测试门店,测试门店有店长")
+    @假设("有门店,门店有店长")
     public void initData() {
         logger.debug("initData");
         //构造平台

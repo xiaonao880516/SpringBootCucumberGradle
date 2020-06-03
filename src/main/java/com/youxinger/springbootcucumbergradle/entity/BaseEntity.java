@@ -15,6 +15,10 @@ public class BaseEntity<Data> {
         return verify;
     }
 
+    public void setVerify(IVerify<BaseEntity, Data> verify) {
+        this.verify = verify;
+    }
+
     public void updatePreVerifyData() {
         if (verify != null) {
             verify.updatePreVerifyData(this);

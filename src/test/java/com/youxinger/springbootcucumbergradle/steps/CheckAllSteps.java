@@ -2,6 +2,7 @@ package com.youxinger.springbootcucumbergradle.steps;
 
 
 import com.youxinger.springbootcucumbergradle.utils.Constants;
+import cucumber.api.PendingException;
 import cucumber.api.java.zh_cn.那么;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,5 +25,4 @@ public class CheckAllSteps {
                 .then().statusCode(200)
                 .time(lessThan(3000L)); // Milliseconds, 验证返回时间
     }
-
 }
