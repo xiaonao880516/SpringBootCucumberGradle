@@ -31,6 +31,11 @@ public interface IVerify<Entity extends BaseEntity, Data> {
     void setExpectedData(Data expectedData);
 
     /**
+     * @return 期待值
+     */
+    Data getExpectedData();
+
+    /**
      * 数据验证的具体实现方法
      */
     void verifyData();

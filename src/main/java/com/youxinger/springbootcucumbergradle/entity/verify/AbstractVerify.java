@@ -23,9 +23,19 @@ public abstract class AbstractVerify<Entity extends BaseEntity, Data> implements
      */
     protected Data expectedData;
 
-    @Override
+    /**
+     * 设置期待值
+     * @param expectedData 期待值
+     */
     public void setExpectedData(Data expectedData) {
         this.expectedData = expectedData;
+    }
+
+    /**
+     * @return 期待值
+     */
+    public Data getExpectedData() {
+        return expectedData;
     }
 
     @Override

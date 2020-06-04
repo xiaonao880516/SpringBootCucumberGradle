@@ -1,6 +1,9 @@
 package com.youxinger.springbootcucumbergradle.steps;
 
 import com.youxinger.springbootcucumbergradle.entity.*;
+import com.youxinger.springbootcucumbergradle.entity.verifydata.GlobalVerifyData;
+import com.youxinger.springbootcucumbergradle.entity.verifydata.ProductVerifyData;
+import com.youxinger.springbootcucumbergradle.entity.verifydata.RepositoryVerifyData;
 import com.youxinger.springbootcucumbergradle.service.EmployeeService;
 import com.youxinger.springbootcucumbergradle.service.SystemUserService;
 import com.youxinger.springbootcucumbergradle.utils.Constants;
@@ -63,12 +66,34 @@ public class GlobalSteps extends BaseSteps {
 
     @那么("^验证预期值正常$")
     public void verifyData() throws Throwable {
-
         dataManager.getGlobal().verifyData();
         for (Customer customer : dataManager.getCustomerMap().values()) {
             customer.verifyData();
         }
     }
+
+
+    @那么("^预期总览销售总额增加(\\d+)元")
+    public void globalVerify(int salesSum) throws Throwable {
+        GlobalVerifyData globalVerifyData= new GlobalVerifyData();
+        globalVerifyData.setSalesSum(salesSum);
+        dataManager.getGlobal().setExpectedData(globalVerifyData);
+    }
+
+    @那么("^预期商品([^\"]+)总仓库存增加(0|[1-9][0-9]*|-[1-9][0-9]*)$")
+    public void globalRepositoryVerify(String barcode, int quantity) throws Throwable {
+        ProductVerifyData productVerifyData = new ProductVerifyData(barcode);
+        productVerifyData.setQuantity(quantity);
+
+        Object repositoryVerifyData = dataManager.getGlobal().getRepository().getVerify().getExpectedData();
+        if(repositoryVerifyData == null){
+            repositoryVerifyData = new RepositoryVerifyData();
+        }
+        ((RepositoryVerifyData)repositoryVerifyData).getProductVerifyDataMap().put(barcode, productVerifyData);
+        dataManager.getGlobal().getRepository().setExpectedData(repositoryVerifyData);
+        throw new PendingException();
+    }
+
 
     /**
      * 后台登陆
@@ -125,5 +150,4 @@ public class GlobalSteps extends BaseSteps {
     public void afterSmokeTest() {
         logger.debug("run after every scenario with @THooks annotation");
     }
-
 }

@@ -70,4 +70,10 @@ public class CustomerSteps extends BaseSteps {
         Customer customer = dataManager.getCustomerByName(customerName);
         customer.setExpectedData(expectedData);
     }
+
+    @当("^该客户下单买入商品([^\"]+)， 总仓(\\d+)个，门店(\\d+)个，([^\"]*)支付方式$")
+    public void buy(String barcode, int quantity, int storeQuantity, String payType) throws Throwable {
+        logger.debug("buy, barcode={}, quantity={}, storeQuantity={}, payType={}", barcode, quantity, storeQuantity, payType);
+        //TODO
+    }
 }

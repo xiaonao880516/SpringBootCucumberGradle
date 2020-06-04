@@ -1,6 +1,7 @@
 package com.youxinger.springbootcucumbergradle.entity;
 
 import com.youxinger.springbootcucumbergradle.entity.verify.CustomerVerify;
+import com.youxinger.springbootcucumbergradle.entity.verifydata.CustomerVerifyData;
 
 /**
  * @author mengwei
