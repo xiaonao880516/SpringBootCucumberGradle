@@ -57,4 +57,8 @@ public class BaseEntity<Data> {
     protected void childVerifyData() {
 
     }
+
+    public String getEntityName(){
+        return "BaseEntity";
+    }
 }

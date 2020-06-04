@@ -71,9 +71,22 @@ public class CustomerSteps extends BaseSteps {
         customer.setExpectedData(expectedData);
     }
 
-    @当("^该客户下单买入商品([^\"]+)， 总仓(\\d+)个，门店(\\d+)个，([^\"]*)支付方式$")
-    public void buy(String barcode, int quantity, int storeQuantity, String payType) throws Throwable {
+    @当("^客户下单买入商品([^\"]+)， 总仓(\\d+)个，门店(\\d+)个，([^\"]*)支付方式$")
+    public void customerBuy(String barcode, int quantity, int storeQuantity, String payType) throws Throwable {
         logger.debug("buy, barcode={}, quantity={}, storeQuantity={}, payType={}", barcode, quantity, storeQuantity, payType);
+        for (String customerName : dataManager.getCustomerMap().keySet()) {
+            customerBuy(customerName, barcode, quantity, storeQuantity, payType);
+        }
         //TODO
+    }
+
+    @当("^客户([^\"]+)下单买入商品([^\"]+)， 总仓(\\d+)个，门店(\\d+)个，([^\"]*)支付方式$")
+    public void customerBuy(String customerName, String barcode, int quantity, int storeQuantity, String payType) throws Throwable {
+        logger.debug("buy, barcode={}, quantity={}, storeQuantity={}, payType={}", barcode, quantity, storeQuantity, payType);
+        Customer customer = dataManager.getCustomerByName(customerName);
+        //TODO 下单具体实现
+        customer.updatePostVerifyData();
+        dataManager.getGlobal().updatePostVerifyData();
+
     }
 }

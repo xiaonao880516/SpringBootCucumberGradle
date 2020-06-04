@@ -1,5 +1,6 @@
 package com.youxinger.springbootcucumbergradle.entity;
 
+import com.youxinger.springbootcucumbergradle.entity.verify.RepositoryVerify;
 import com.youxinger.springbootcucumbergradle.entity.verifydata.ProductVerifyData;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class Repository extends BaseEntity{
     public Repository(String name, String[] productsBarcode) {
         this.name = name;
         this.productsBarcode = productsBarcode;
+        this.verify = new RepositoryVerify(name);
     }
 
     public String getName() {

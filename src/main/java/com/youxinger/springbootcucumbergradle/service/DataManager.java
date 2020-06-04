@@ -80,7 +80,7 @@ public class DataManager {
         return null;
     }
 
-    public List<Employee> getAllEmployees(){
+    public List<Employee> getAllEmployees() {
         List<Employee> employeeList = new ArrayList<>();
         if (global != null) {
             for (ProvinceOperationCenter provinceOperationCenter : global.getProvinceOperationCenterList()) {
@@ -92,5 +92,31 @@ public class DataManager {
             }
         }
         return employeeList;
+    }
+
+    public List<Store> getAllStore() {
+        List<Store> storeList = new ArrayList<>();
+        if (global != null) {
+            for (ProvinceOperationCenter provinceOperationCenter : global.getProvinceOperationCenterList()) {
+                for (OperationCenter operationCenter : provinceOperationCenter.getOperationCenterList()) {
+                    storeList.addAll(operationCenter.getStoreList());
+                }
+            }
+        }
+        return storeList;
+    }
+
+    public List<Platform> getAllPlatform() {
+        List<Platform> platformList = new ArrayList<>();
+        if (global != null) {
+            for (ProvinceOperationCenter provinceOperationCenter : global.getProvinceOperationCenterList()) {
+                for (OperationCenter operationCenter : provinceOperationCenter.getOperationCenterList()) {
+                    for (Store store : operationCenter.getStoreList()) {
+                        platformList.addAll(store.getPlatformList());
+                    }
+                }
+            }
+        }
+        return platformList;
     }
 }

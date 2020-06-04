@@ -5,6 +5,8 @@ import com.youxinger.springbootcucumbergradle.entity.verifydata.ProvinceOperatio
 import com.youxinger.springbootcucumbergradle.service.ProvinceOperationCenterService;
 import com.youxinger.springbootcucumbergradle.utils.CustomManageObjUtil;
 import org.junit.Assert;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author mengwei
@@ -13,10 +15,17 @@ import org.junit.Assert;
  */
 public class ProvinceOperationCenterVerify extends AbstractVerify<ProvinceOperationCenter, ProvinceOperationCenterVerifyData> {
 
+    private static final Logger logger = LoggerFactory.getLogger(ProvinceOperationCenterVerify.class);
+
     private ProvinceOperationCenterService provinceOperationCenterService = CustomManageObjUtil.getBean(ProvinceOperationCenterService.class);
+
+    public ProvinceOperationCenterVerify(String name){
+        verifyName = "province operation center:"+ name;
+    }
 
     @Override
     protected void verifyDataSelf() {
+        logger.debug("{} verifyDataSelf", verifyName);
         Assert.assertEquals("验证省运营中心业绩失败", expectedData.getSalesSum(), postVerifyData.getSalesSum() - preVerifyData.getSalesSum(), 2.0);
     }
 

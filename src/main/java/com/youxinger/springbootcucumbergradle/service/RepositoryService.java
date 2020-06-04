@@ -20,6 +20,9 @@ public class RepositoryService {
     public RepositoryVerifyData getVerifyData(Repository repository) {
         logger.debug("getVerifyData repository={}", repository);
         RepositoryVerifyData repositoryVerifyData = new RepositoryVerifyData();
+        ProductVerifyData productVerifyData = new ProductVerifyData("M216C237C0458");
+        productVerifyData.setQuantity(0);
+        repositoryVerifyData.getProductVerifyDataMap().put("M216C237C0458", productVerifyData);
         return repositoryVerifyData;
     }
 }

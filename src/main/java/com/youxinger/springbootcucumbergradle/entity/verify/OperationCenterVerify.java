@@ -5,6 +5,8 @@ import com.youxinger.springbootcucumbergradle.entity.verifydata.OperationCenterV
 import com.youxinger.springbootcucumbergradle.service.OperationCenterService;
 import com.youxinger.springbootcucumbergradle.utils.CustomManageObjUtil;
 import org.junit.Assert;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author mengwei
@@ -13,10 +15,17 @@ import org.junit.Assert;
  */
 public class OperationCenterVerify extends AbstractVerify<OperationCenter, OperationCenterVerifyData> {
 
+    private static final Logger logger = LoggerFactory.getLogger(OperationCenterVerify.class);
+
     private OperationCenterService operationCenterService = CustomManageObjUtil.getBean(OperationCenterService.class);
+
+    public OperationCenterVerify(String name){
+        verifyName = "operation center:"+ name;
+    }
 
     @Override
     protected void verifyDataSelf() {
+        logger.debug("{} verifyDataSelf", verifyName);
         Assert.assertEquals("验证运营中心业绩失败", expectedData.getSalesSum(), postVerifyData.getSalesSum() - preVerifyData.getSalesSum(), 2.0);
     }
 

@@ -1,5 +1,7 @@
 package com.youxinger.springbootcucumbergradle.entity;
 
+import com.youxinger.springbootcucumbergradle.entity.verify.OperationCenterVerify;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +19,7 @@ public class OperationCenter extends BaseEntity{
     public OperationCenter(String name, String number){
         this.name = name;
         this.number = number;
+        this.verify = new OperationCenterVerify(name);
     }
 
     public String getName() {
@@ -63,6 +66,13 @@ public class OperationCenter extends BaseEntity{
     protected void childUpdatePostVerifyData() {
         for(Store store : storeList){
             store.updatePostVerifyData();
+        }
+    }
+
+    @Override
+    protected void childVerifyData() {
+        for(Store store : storeList){
+            store.verifyData();
         }
     }
 }

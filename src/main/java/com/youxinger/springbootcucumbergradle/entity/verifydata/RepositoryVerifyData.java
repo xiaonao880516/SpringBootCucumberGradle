@@ -1,5 +1,6 @@
 package com.youxinger.springbootcucumbergradle.entity.verifydata;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Map;
  * @version 1.0
  */
 public class RepositoryVerifyData {
-    private Map<String, ProductVerifyData> productVerifyDataMap;
+    private Map<String, ProductVerifyData> productVerifyDataMap = new HashMap<>();
 
     public Map<String, ProductVerifyData> getProductVerifyDataMap() {
         return productVerifyDataMap;

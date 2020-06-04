@@ -1,5 +1,6 @@
 package com.youxinger.springbootcucumbergradle.entity;
 
+import com.youxinger.springbootcucumbergradle.entity.verify.StoreVerify;
 import com.youxinger.springbootcucumbergradle.utils.Constants;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class Store extends BaseEntity {
         this.name = name;
         this.number = number;
         this.repository = new Repository(name, Constants.PRODUCTS_BARCODE);
+        this.verify = new StoreVerify(name);
     }
 
     public String getName() {
@@ -95,5 +97,16 @@ public class Store extends BaseEntity {
             employee.updatePostVerifyData();
         }
         repository.updatePostVerifyData();
+    }
+
+    @Override
+    protected void childVerifyData() {
+        for (Platform platform : platformList) {
+            platform.verifyData();
+        }
+        for (Employee employee : employeeList) {
+            employee.verifyData();
+        }
+        repository.verifyData();
     }
 }

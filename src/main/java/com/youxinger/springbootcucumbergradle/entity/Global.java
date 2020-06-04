@@ -1,5 +1,6 @@
 package com.youxinger.springbootcucumbergradle.entity;
 
+import com.youxinger.springbootcucumbergradle.entity.verify.GlobalVerify;
 import com.youxinger.springbootcucumbergradle.utils.Constants;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class Global extends BaseEntity {
 
     public Global() {
         this.repository = new Repository("总仓", Constants.PRODUCTS_BARCODE);
+        this.verify = new GlobalVerify();
     }
 
     public List<ProvinceOperationCenter> getProvinceOperationCenterList() {
@@ -51,6 +53,14 @@ public class Global extends BaseEntity {
             provinceOperationCenter.updatePostVerifyData();
         }
         repository.updatePostVerifyData();
+    }
+
+    @Override
+    protected void childVerifyData() {
+        for (ProvinceOperationCenter provinceOperationCenter : provinceOperationCenterList) {
+            provinceOperationCenter.verifyData();
+        }
+        repository.verifyData();
     }
 
     @Override

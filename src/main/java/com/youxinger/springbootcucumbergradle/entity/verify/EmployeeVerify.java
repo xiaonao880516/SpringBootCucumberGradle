@@ -5,6 +5,8 @@ import com.youxinger.springbootcucumbergradle.entity.verifydata.EmployeeVerifyDa
 import com.youxinger.springbootcucumbergradle.service.EmployeeService;
 import com.youxinger.springbootcucumbergradle.utils.CustomManageObjUtil;
 import org.junit.Assert;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author mengwei
@@ -13,10 +15,17 @@ import org.junit.Assert;
  */
 public class EmployeeVerify extends AbstractVerify<Employee, EmployeeVerifyData> {
 
+    private static final Logger logger = LoggerFactory.getLogger(EmployeeVerify.class);
+
     private EmployeeService employeeService = CustomManageObjUtil.getBean(EmployeeService.class);
+
+    public  EmployeeVerify(String name){
+        verifyName = "employee:"+ name;
+    }
 
     @Override
     protected void verifyDataSelf() {
+        logger.debug("{} verifyDataSelf", verifyName);
         Assert.assertEquals("验证员工业绩失败", expectedData.getPerformance(), postVerifyData.getPerformance() - preVerifyData.getPerformance(), 2.0);
     }
 

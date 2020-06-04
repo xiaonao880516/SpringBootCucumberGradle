@@ -8,7 +8,7 @@ import org.springframework.test.context.ContextConfiguration;
 
 @RunWith(Cucumber.class)
 @SpringBootTest(classes = {SpringbootcucumbergradleApplication.class})
-@CucumberOptions(plugin = {"json:target/cucumber.json", "pretty"}, features = "src/test/resources", tags = {"@lanchao"}, format = {
+@CucumberOptions(plugin = {"json:target/cucumber.json", "pretty"}, features = "src/test/resources", tags = {"@lanchaoTest"}, format = {
         "html:target/html-report/",
         "json:target/json-report/dw.json"
 })

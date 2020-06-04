@@ -1,5 +1,7 @@
 package com.youxinger.springbootcucumbergradle.entity;
 
+import com.youxinger.springbootcucumbergradle.entity.verify.PlatformVerify;
+
 /**
  * @author mengwei
  * 2020/5/27 17:17
@@ -14,6 +16,7 @@ public class Platform extends BaseEntity{
     public Platform(int id, String name){
         this.id = id;
         this.name = name;
+        this.verify = new PlatformVerify(name);
     }
 
     public int getId() {

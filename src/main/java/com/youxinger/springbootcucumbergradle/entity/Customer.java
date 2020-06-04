@@ -1,7 +1,6 @@
 package com.youxinger.springbootcucumbergradle.entity;
 
 import com.youxinger.springbootcucumbergradle.entity.verify.CustomerVerify;
-import com.youxinger.springbootcucumbergradle.entity.verifydata.CustomerVerifyData;
 
 /**
  * @author mengwei
@@ -37,7 +36,7 @@ public class Customer extends BaseEntity{
         this.city = "北京";
         this.province = "北京市";
         this.consignee = name;
-        this.verify = new CustomerVerify();
+        this.verify = new CustomerVerify(name);
     }
 
 

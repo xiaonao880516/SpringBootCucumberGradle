@@ -5,6 +5,8 @@ import com.youxinger.springbootcucumbergradle.entity.verifydata.PlatformVerifyDa
 import com.youxinger.springbootcucumbergradle.service.PlatformService;
 import com.youxinger.springbootcucumbergradle.utils.CustomManageObjUtil;
 import org.junit.Assert;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author mengwei
@@ -13,10 +15,17 @@ import org.junit.Assert;
  */
 public class PlatformVerify extends AbstractVerify<Platform, PlatformVerifyData> {
 
+    private static final Logger logger = LoggerFactory.getLogger(PlatformVerify.class);
+
     private PlatformService platformService = CustomManageObjUtil.getBean(PlatformService.class);
+
+    public PlatformVerify(String name){
+        verifyName = "platform:"+ name;
+    }
 
     @Override
     protected void verifyDataSelf() {
+        logger.debug("{} verifyDataSelf", verifyName);
         Assert.assertEquals("验证平台业绩失败", expectedData.getPerformance(), postVerifyData.getPerformance() - preVerifyData.getPerformance(), 2.0);
     }
 

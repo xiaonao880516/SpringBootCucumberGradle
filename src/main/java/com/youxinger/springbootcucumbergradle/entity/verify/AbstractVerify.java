@@ -10,6 +10,7 @@ import org.junit.Assert;
  */
 public abstract class AbstractVerify<Entity extends BaseEntity, Data> implements IVerify<Entity, Data> {
 
+    protected String verifyName;
     /**
      * 操作之前的数据信息
      */
@@ -45,10 +46,10 @@ public abstract class AbstractVerify<Entity extends BaseEntity, Data> implements
             return;
         }
         if (preVerifyData == null) {
-            Assert.fail("无操作前值");
+            Assert.fail("无操作前值，name=" + verifyName);
         }
         if (postVerifyData == null) {
-            Assert.fail("无操作后值");
+            Assert.fail("无操作后值，name=" + verifyName);
         }
         verifyDataSelf();
     }

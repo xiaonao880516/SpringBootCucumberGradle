@@ -1,5 +1,7 @@
 package com.youxinger.springbootcucumbergradle.entity;
 
+import com.youxinger.springbootcucumbergradle.entity.verify.EmployeeVerify;
+
 /**
  * 前台员工实体类
  */
@@ -13,14 +15,12 @@ public class Employee extends BaseEntity{
     private String tid; //前台登录tid
     private Store store = null;//员工所属门店
 
-    public Employee(){
-    }
-
     public Employee(int id, String name, String phone, String password){
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.password = password;
+        this.verify = new EmployeeVerify(name);
     }
 
     public int getId() {

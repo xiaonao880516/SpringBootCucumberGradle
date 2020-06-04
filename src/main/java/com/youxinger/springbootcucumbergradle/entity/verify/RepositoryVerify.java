@@ -6,6 +6,8 @@ import com.youxinger.springbootcucumbergradle.entity.verifydata.RepositoryVerify
 import com.youxinger.springbootcucumbergradle.service.RepositoryService;
 import com.youxinger.springbootcucumbergradle.utils.CustomManageObjUtil;
 import org.junit.Assert;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author mengwei
@@ -14,10 +16,17 @@ import org.junit.Assert;
  */
 public class RepositoryVerify extends AbstractVerify<Repository, RepositoryVerifyData> {
 
+    private static final Logger logger = LoggerFactory.getLogger(RepositoryVerify.class);
+
     private RepositoryService repositoryService = CustomManageObjUtil.getBean(RepositoryService.class);
+
+    public RepositoryVerify(String name){
+        verifyName = "repository:"+ name;
+    }
 
     @Override
     protected void verifyDataSelf() {
+        logger.debug("{} verifyDataSelf", verifyName);
         if (expectedData != null && expectedData.getProductVerifyDataMap() != null) {
             for (String barcode : expectedData.getProductVerifyDataMap().keySet()) {
                 ProductVerifyData expected = expectedData.getProductVerifyDataMap().get(barcode);

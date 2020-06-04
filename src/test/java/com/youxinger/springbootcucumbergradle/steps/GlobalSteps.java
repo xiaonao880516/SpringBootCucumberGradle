@@ -7,7 +7,6 @@ import com.youxinger.springbootcucumbergradle.entity.verifydata.RepositoryVerify
 import com.youxinger.springbootcucumbergradle.service.EmployeeService;
 import com.youxinger.springbootcucumbergradle.service.SystemUserService;
 import com.youxinger.springbootcucumbergradle.utils.Constants;
-import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.zh_cn.假设;
@@ -60,7 +59,7 @@ public class GlobalSteps extends BaseSteps {
         dataManager.setGlobal(global);
         backgroundLogin();
         foregroundLogin();
-
+        global.updatePreVerifyData();
         logger.debug("initData, global={}", global);
     }
 
@@ -91,7 +90,6 @@ public class GlobalSteps extends BaseSteps {
         }
         ((RepositoryVerifyData)repositoryVerifyData).getProductVerifyDataMap().put(barcode, productVerifyData);
         dataManager.getGlobal().getRepository().setExpectedData(repositoryVerifyData);
-        throw new PendingException();
     }
 
 
