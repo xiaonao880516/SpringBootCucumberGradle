@@ -33,6 +33,8 @@
     </appender>
     <!-- project default level -->
     <logger name="com.youxinger" level="debug" />
+    <logger name="org.apache.http" level="WARN" />
+
 
     <!-- 日志输出级别 常用的日志级别按照从高到低依次为：ERROR、WARN、INFO、DEBUG。 -->
     <root level="WARN">

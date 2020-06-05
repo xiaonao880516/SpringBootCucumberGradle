@@ -19,10 +19,10 @@ public class Store extends BaseEntity {
     private List<Platform> platformList = new ArrayList<>();
     private List<Employee> employeeList = new ArrayList<>();
 
-    public Store(String name, String number) {
+    public Store(String name, String number, String repoId) {
         this.name = name;
         this.number = number;
-        this.repository = new Repository(name, Constants.PRODUCTS_BARCODE);
+        this.repository = new Repository(repoId, name, Constants.PRODUCTS_BARCODE);
         this.verify = new StoreVerify(name);
     }
 

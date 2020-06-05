@@ -17,7 +17,7 @@ import static org.junit.Assert.fail;
 public class SystemUserService {
 
     /**
-     * 员工登录
+     * 后台系统登录
      */
     public void backgroundLogin(SystemUser systemUser) {
         if (systemUser != null) {

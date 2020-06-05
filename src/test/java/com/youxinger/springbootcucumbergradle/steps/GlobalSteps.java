@@ -43,7 +43,7 @@ public class GlobalSteps extends BaseSteps {
         //构造员工
         Employee employee = new Employee(Constants.EMPLOYEE_ID, Constants.EMPLOYEE_NAME, Constants.EMPLOYEE_PHONE, Constants.EMPLOYEE_PASSWORD);
         //构造门店
-        Store testStore = new Store(Constants.STORE_NAME, Constants.STORE_NUMBER);
+        Store testStore = new Store(Constants.STORE_NAME, Constants.STORE_NUMBER, Constants.STORE_REPO_ID);
         testStore.getPlatformList().add(testPlatform);
         testStore.getEmployeeList().add(employee);
         //构造运营中心

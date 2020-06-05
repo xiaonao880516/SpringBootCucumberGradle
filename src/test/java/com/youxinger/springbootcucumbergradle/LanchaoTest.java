@@ -2,6 +2,8 @@ package com.youxinger.springbootcucumbergradle;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
+import io.restassured.RestAssured;
+import io.restassured.parsing.Parser;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
@@ -14,4 +16,7 @@ import org.springframework.test.context.ContextConfiguration;
 })
 @ContextConfiguration // 不加此注解，bean会注入不进去
 public class LanchaoTest {
+    static {
+        RestAssured.registerParser("text/plain", Parser.JSON);
+    }
 }

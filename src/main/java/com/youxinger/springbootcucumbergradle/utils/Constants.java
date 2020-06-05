@@ -17,6 +17,7 @@ public class Constants {
 
     public static final String STORE_NAME = "测试门店";
     public static final String STORE_NUMBER = "CESHI01";
+    public static final String STORE_REPO_ID = "CESHI-01";
 
 
     public static final int PLATFORM_ID = 398;

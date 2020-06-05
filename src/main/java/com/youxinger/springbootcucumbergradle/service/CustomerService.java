@@ -3,7 +3,6 @@ package com.youxinger.springbootcucumbergradle.service;
 import com.alibaba.fastjson.JSONObject;
 import com.youxinger.springbootcucumbergradle.entity.Customer;
 import com.youxinger.springbootcucumbergradle.entity.Employee;
-import com.youxinger.springbootcucumbergradle.entity.Platform;
 import com.youxinger.springbootcucumbergradle.entity.verifydata.CustomerVerifyData;
 import com.youxinger.springbootcucumbergradle.utils.Constants;
 import io.restassured.response.Response;
@@ -33,7 +32,7 @@ public class CustomerService {
     @Resource
     protected DataManager dataManager;
 
-    public void customerRegister(Customer customer, Employee employee, Platform platform) {
+    public void customerRegister(Customer customer) {
         if (customer == null) {
             fail("无效的客户,注册失败");
         } else {
@@ -47,11 +46,11 @@ public class CustomerService {
             params.put("city", customer.getCity());
             params.put("nickname", customer.getName());
             params.put("openid", customer.getOpenid());
-            if (employee != null) {
-                params.put("employee_number", employee.getId());
+            if (customer.getEmployee() != null) {
+                params.put("employee_number", customer.getEmployee().getId());
             }
-            if (platform != null) {
-                params.put("platform_number", platform.getId());
+            if (customer.getPlatform() != null) {
+                params.put("platform_number", customer.getPlatform().getId());
             }
             Response response = given()
                     .contentType("application/json")
@@ -96,7 +95,7 @@ public class CustomerService {
     /**
      * 充值订单付款
      *
-     * @param rechargeOrderId
+     * @param rechargeOrderId 充值订单号
      */
     private void rechargeOrderPay(String rechargeOrderId) {
         given()
@@ -121,7 +120,6 @@ public class CustomerService {
                 .header("Accept", "application/json, text/plain, */*")
                 .header("tid", employee.getTid())
                 .post(Constants.DOMAIN + "/frontStage/vip/search-byphone");
-
         response.getBody();
     }
 

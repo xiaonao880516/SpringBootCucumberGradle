@@ -19,7 +19,7 @@ public class Global extends BaseEntity {
     private Repository repository;
 
     public Global() {
-        this.repository = new Repository("总仓", Constants.PRODUCTS_BARCODE);
+        this.repository = new Repository("GLOBAL","总仓", Constants.PRODUCTS_BARCODE);
         this.verify = new GlobalVerify();
     }
 

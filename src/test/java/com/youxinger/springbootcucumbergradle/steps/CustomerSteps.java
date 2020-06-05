@@ -6,6 +6,7 @@ import com.youxinger.springbootcucumbergradle.entity.Employee;
 import com.youxinger.springbootcucumbergradle.entity.Platform;
 import com.youxinger.springbootcucumbergradle.entity.verifydata.CustomerVerifyData;
 import com.youxinger.springbootcucumbergradle.service.CustomerService;
+import com.youxinger.springbootcucumbergradle.service.OrderService;
 import com.youxinger.springbootcucumbergradle.utils.CardUtil;
 import com.youxinger.springbootcucumbergradle.utils.Constants;
 import com.youxinger.springbootcucumbergradle.utils.RandomValue;
@@ -28,6 +29,9 @@ public class CustomerSteps extends BaseSteps {
     @Resource
     private CustomerService customerService;
 
+    @Resource
+    private OrderService orderService;
+
 
     @假设("随机创建姓名为([^\"]+)的客户")
     public void customerCreateByName(String name) {
@@ -36,7 +40,9 @@ public class CustomerSteps extends BaseSteps {
 
         Employee employee = dataManager.getEmployeeById(Constants.EMPLOYEE_ID);
         Platform platform = dataManager.getPlatformById(Constants.PLATFORM_ID);
-        customerService.customerRegister(customer, employee, platform);
+        customer.setEmployee(employee);
+        customer.setPlatform(platform);
+        customerService.customerRegister(customer);
         dataManager.getCustomerMap().put(name, customer);
         customer.updatePreVerifyData();
     }
@@ -73,18 +79,16 @@ public class CustomerSteps extends BaseSteps {
 
     @当("^客户下单买入商品([^\"]+)， 总仓(\\d+)个，门店(\\d+)个，([^\"]*)支付方式$")
     public void customerBuy(String barcode, int quantity, int storeQuantity, String payType) throws Throwable {
-        logger.debug("buy, barcode={}, quantity={}, storeQuantity={}, payType={}", barcode, quantity, storeQuantity, payType);
         for (String customerName : dataManager.getCustomerMap().keySet()) {
             customerBuy(customerName, barcode, quantity, storeQuantity, payType);
         }
-        //TODO
     }
 
     @当("^客户([^\"]+)下单买入商品([^\"]+)， 总仓(\\d+)个，门店(\\d+)个，([^\"]*)支付方式$")
     public void customerBuy(String customerName, String barcode, int quantity, int storeQuantity, String payType) throws Throwable {
         logger.debug("buy, barcode={}, quantity={}, storeQuantity={}, payType={}", barcode, quantity, storeQuantity, payType);
         Customer customer = dataManager.getCustomerByName(customerName);
-        //TODO 下单具体实现
+        orderService.posOrder(customer);
         customer.updatePostVerifyData();
         dataManager.getGlobal().updatePostVerifyData();
 
