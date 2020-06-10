@@ -19,6 +19,9 @@ public class BaseEntity<Data> {
         this.verify = verify;
     }
 
+    /**
+     * 更新操作之前值
+     */
     public void updatePreVerifyData() {
         if (verify != null) {
             verify.updatePreVerifyData(this);
@@ -26,10 +29,16 @@ public class BaseEntity<Data> {
         childUpdatePreVerifyData();
     }
 
+    /**
+     * 更新子节点操作之前值
+     */
     protected void childUpdatePreVerifyData() {
 
     }
 
+    /**
+     * 更新操作之后值
+     */
     public void updatePostVerifyData() {
         if (verify != null) {
             verify.updatePostVerifyData(this);
@@ -37,16 +46,26 @@ public class BaseEntity<Data> {
         childUpdatePostVerifyData();
     }
 
+    /**
+     * 更新子节点操作之后值
+     */
     protected void childUpdatePostVerifyData() {
 
     }
 
+    /**
+     * 设置预期值
+     * @param expectedData
+     */
     public void setExpectedData(Data expectedData) {
         if (verify != null) {
             verify.setExpectedData(expectedData);
         }
     }
 
+    /**
+     * 验证预期值
+     */
     public void verifyData() {
         if (verify != null) {
             verify.verifyData();
@@ -54,6 +73,9 @@ public class BaseEntity<Data> {
         childVerifyData();
     }
 
+    /**
+     * 验证子节点预期值
+     */
     protected void childVerifyData() {
 
     }

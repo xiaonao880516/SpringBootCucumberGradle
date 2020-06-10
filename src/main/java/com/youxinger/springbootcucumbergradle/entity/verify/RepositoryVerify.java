@@ -26,13 +26,15 @@ public class RepositoryVerify extends AbstractVerify<Repository, RepositoryVerif
 
     @Override
     protected void verifyDataSelf() {
-        logger.debug("{} verifyDataSelf", verifyName);
+        logger.info("{} verifyDataSelf", verifyName);
         if (expectedData != null && expectedData.getProductVerifyDataMap() != null) {
             for (String barcode : expectedData.getProductVerifyDataMap().keySet()) {
                 ProductVerifyData expected = expectedData.getProductVerifyDataMap().get(barcode);
                 ProductVerifyData pre = preVerifyData.getProductVerifyDataMap().get(barcode);
                 ProductVerifyData post = postVerifyData.getProductVerifyDataMap().get(barcode);
-                Assert.assertEquals("验证库存失败", expected.getQuantity(), post.getQuantity() - pre.getQuantity(), 0);
+                logger.info("post.getQuantity()={}", post.getQuantity());
+                logger.info("pre.getQuantity()={}", pre.getQuantity());
+                Assert.assertEquals("repository:"+ verifyName+"， 验证库存失败", expected.getQuantity(), post.getQuantity() - pre.getQuantity(), 0);
             }
         }
     }

@@ -11,7 +11,7 @@ public class Employee extends BaseEntity{
     private String name;
     private String phone;
     private String password;
-    private boolean entered = false;
+    private boolean entered = false;//是否登录
     private String tid; //前台登录tid
     private Store store = null;//员工所属门店
 

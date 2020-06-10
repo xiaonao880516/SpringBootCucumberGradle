@@ -10,7 +10,7 @@ public class SystemUser {
 
     private String username;
     private String password;
-    private boolean entered = false;
+    private boolean entered = false;//是否登录
     private String tid;
 
     public SystemUser(String username, String password){
