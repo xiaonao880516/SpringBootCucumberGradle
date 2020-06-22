@@ -1,6 +1,8 @@
 package com.youxinger.springbootcucumbergradle.entity;
 
+import com.youxinger.springbootcucumbergradle.entity.verify.IVerify;
 import com.youxinger.springbootcucumbergradle.entity.verify.StoreVerify;
+import com.youxinger.springbootcucumbergradle.entity.verifydata.StoreVerifyData;
 import com.youxinger.springbootcucumbergradle.utils.Constants;
 
 import java.util.ArrayList;
@@ -11,7 +13,7 @@ import java.util.List;
  * 2020/5/27 17:17
  * @version 1.0
  */
-public class Store extends BaseEntity {
+public class Store extends BaseEntity<StoreVerifyData> {
 
     private String name;//门店名称
     private String number;//门店编号
@@ -23,7 +25,8 @@ public class Store extends BaseEntity {
         this.name = name;
         this.number = number;
         this.repository = new Repository(repoId, name, Constants.PRODUCTS_BARCODE);
-        this.verify = new StoreVerify(name);
+        StoreVerify storeVerify = new StoreVerify(name);
+        this.verify = (IVerify)storeVerify;
     }
 
     public String getName() {

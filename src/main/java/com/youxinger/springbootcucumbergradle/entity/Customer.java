@@ -1,13 +1,16 @@
 package com.youxinger.springbootcucumbergradle.entity;
 
+import com.youxinger.springbootcucumbergradle.entity.verify.AbstractVerify;
 import com.youxinger.springbootcucumbergradle.entity.verify.CustomerVerify;
+import com.youxinger.springbootcucumbergradle.entity.verify.IVerify;
+import com.youxinger.springbootcucumbergradle.entity.verifydata.CustomerVerifyData;
 
 /**
  * @author mengwei
  * 2020/5/22 15:44
  * @version 1.0
  */
-public class Customer extends BaseEntity{
+public class Customer extends BaseEntity<CustomerVerifyData>{
 
     private String member_number;  // 会员编号
     private String name;  //姓名
@@ -36,7 +39,8 @@ public class Customer extends BaseEntity{
         this.city = "北京";
         this.province = "北京市";
         this.consignee = name;
-        this.verify = new CustomerVerify(name);
+        CustomerVerify customerVerify = new CustomerVerify(name);
+        this.verify = (IVerify)customerVerify;
     }
 
 

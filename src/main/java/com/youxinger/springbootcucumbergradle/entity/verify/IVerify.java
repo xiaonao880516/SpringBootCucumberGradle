@@ -8,7 +8,7 @@ import com.youxinger.springbootcucumbergradle.entity.BaseEntity;
  * @version 1.0
  * 数据验证接口，所有类型的数据验证都要继承此接口
  */
-public interface IVerify<Entity extends BaseEntity, Data> {
+public interface IVerify<Entity extends BaseEntity<Data>, Data> {
 
     /**
      * 更新操作之前的值

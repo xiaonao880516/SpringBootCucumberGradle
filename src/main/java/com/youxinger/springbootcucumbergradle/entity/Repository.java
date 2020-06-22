@@ -1,19 +1,18 @@
 package com.youxinger.springbootcucumbergradle.entity;
 
+import com.youxinger.springbootcucumbergradle.entity.verify.IVerify;
 import com.youxinger.springbootcucumbergradle.entity.verify.RepositoryVerify;
 import com.youxinger.springbootcucumbergradle.entity.verifydata.ProductVerifyData;
 import com.youxinger.springbootcucumbergradle.entity.verifydata.RepositoryVerifyData;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author mengwei
  * 2020/5/27 18:26
  * @version 1.0
  */
-public class Repository extends BaseEntity{
+public class Repository extends BaseEntity<RepositoryVerifyData>{
 
     private String name;//仓库名称
     private String id;
@@ -23,7 +22,8 @@ public class Repository extends BaseEntity{
         this.id = id;
         this.name = name;
         this.productsBarcode = productsBarcode;
-        this.verify = new RepositoryVerify(name);
+        RepositoryVerify repositoryVerify = new RepositoryVerify(name);
+        this.verify = (IVerify)repositoryVerify;
     }
 
     public String getId() {
@@ -55,12 +55,12 @@ public class Repository extends BaseEntity{
      * @param productVerifyData
      */
     public void setProductVerifyData(ProductVerifyData productVerifyData){
-        Object repositoryVerifyData = this.verify.getExpectedData();
+        RepositoryVerifyData repositoryVerifyData = this.verify.getExpectedData();
         if(repositoryVerifyData == null){
             repositoryVerifyData = new RepositoryVerifyData();
             this.verify.setExpectedData(repositoryVerifyData);
         }
-        ((RepositoryVerifyData)repositoryVerifyData).getProductVerifyDataMap().put(productVerifyData.getBarcode(), productVerifyData);
+        repositoryVerifyData.getProductVerifyDataMap().put(productVerifyData.getBarcode(), productVerifyData);
     }
 
     @Override

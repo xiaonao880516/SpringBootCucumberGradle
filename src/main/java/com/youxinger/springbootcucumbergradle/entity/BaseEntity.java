@@ -9,7 +9,7 @@ import com.youxinger.springbootcucumbergradle.entity.verify.IVerify;
  */
 public class BaseEntity<Data> {
 
-    protected IVerify<BaseEntity, Data> verify;
+    protected IVerify<BaseEntity<Data>, Data> verify;
 
     /**
      * 更新操作之前值

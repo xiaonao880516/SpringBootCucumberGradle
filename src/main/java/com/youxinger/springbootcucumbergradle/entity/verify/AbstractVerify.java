@@ -8,7 +8,7 @@ import org.junit.Assert;
  * 2020/5/29 16:35
  * @version 1.0
  */
-public abstract class AbstractVerify<Entity extends BaseEntity, Data> implements IVerify<Entity, Data> {
+public abstract class AbstractVerify<Entity extends BaseEntity<Data>, Data> implements IVerify<Entity, Data> {
 
     protected String verifyName;
     /**

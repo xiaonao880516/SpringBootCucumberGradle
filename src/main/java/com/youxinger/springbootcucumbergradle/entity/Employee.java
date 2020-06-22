@@ -1,11 +1,14 @@
 package com.youxinger.springbootcucumbergradle.entity;
 
+import com.youxinger.springbootcucumbergradle.entity.verify.AbstractVerify;
 import com.youxinger.springbootcucumbergradle.entity.verify.EmployeeVerify;
+import com.youxinger.springbootcucumbergradle.entity.verify.IVerify;
+import com.youxinger.springbootcucumbergradle.entity.verifydata.EmployeeVerifyData;
 
 /**
  * 前台员工实体类
  */
-public class Employee extends BaseEntity{
+public class Employee extends BaseEntity<EmployeeVerifyData>{
 
     private int id;
     private String name;
@@ -20,7 +23,8 @@ public class Employee extends BaseEntity{
         this.name = name;
         this.phone = phone;
         this.password = password;
-        this.verify = new EmployeeVerify(name);
+        EmployeeVerify employeeVerify = new EmployeeVerify(name);
+        this.verify = (IVerify)employeeVerify;
     }
 
     public int getId() {

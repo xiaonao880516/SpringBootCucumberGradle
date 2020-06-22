@@ -1,6 +1,8 @@
 package com.youxinger.springbootcucumbergradle.entity;
 
 import com.youxinger.springbootcucumbergradle.entity.verify.GlobalVerify;
+import com.youxinger.springbootcucumbergradle.entity.verify.IVerify;
+import com.youxinger.springbootcucumbergradle.entity.verifydata.GlobalVerifyData;
 import com.youxinger.springbootcucumbergradle.utils.Constants;
 
 import java.util.ArrayList;
@@ -11,7 +13,7 @@ import java.util.List;
  * 2020/5/27 17:18
  * @version 1.0
  */
-public class Global extends BaseEntity {
+public class Global extends BaseEntity<GlobalVerifyData> {
 
     //所有省运营中心
     private List<ProvinceOperationCenter> provinceOperationCenterList = new ArrayList<>();
@@ -20,7 +22,8 @@ public class Global extends BaseEntity {
 
     public Global() {
         this.repository = new Repository("GLOBAL","总仓", Constants.PRODUCTS_BARCODE);
-        this.verify = new GlobalVerify();
+        GlobalVerify globalVerify = new GlobalVerify();
+        this.verify = (IVerify)globalVerify;
     }
 
     public List<ProvinceOperationCenter> getProvinceOperationCenterList() {
