@@ -25,14 +25,9 @@ public class StoreSteps extends BaseSteps {
     @那么("^预期商品([^\"]+)门店库存增加(0|[1-9][0-9]*|-[1-9][0-9]*)$")
     public void storeRepositoryVerifyStep(String barcode, int quantity) throws Throwable {
         for (Store store : dataManager.getAllStore()) {
-            Object repositoryVerifyData = store.getRepository().getVerify().getExpectedData();
-            if (repositoryVerifyData == null) {
-                repositoryVerifyData = new RepositoryVerifyData();
-            }
             ProductVerifyData productVerifyData = new ProductVerifyData(barcode);
             productVerifyData.setQuantity(quantity);
-            ((RepositoryVerifyData) repositoryVerifyData).getProductVerifyDataMap().put(barcode, productVerifyData);
-            store.getRepository().setExpectedData(repositoryVerifyData);
+            store.getRepository().setProductVerifyData(productVerifyData);
         }
     }
 }

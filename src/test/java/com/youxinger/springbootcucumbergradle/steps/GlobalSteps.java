@@ -83,13 +83,7 @@ public class GlobalSteps extends BaseSteps {
     public void globalRepositoryVerify(String barcode, int quantity) throws Throwable {
         ProductVerifyData productVerifyData = new ProductVerifyData(barcode);
         productVerifyData.setQuantity(quantity);
-
-        Object repositoryVerifyData = dataManager.getGlobal().getRepository().getVerify().getExpectedData();
-        if(repositoryVerifyData == null){
-            repositoryVerifyData = new RepositoryVerifyData();
-        }
-        ((RepositoryVerifyData)repositoryVerifyData).getProductVerifyDataMap().put(barcode, productVerifyData);
-        dataManager.getGlobal().getRepository().setExpectedData(repositoryVerifyData);
+        dataManager.getGlobal().getRepository().setProductVerifyData(productVerifyData);
     }
 
 

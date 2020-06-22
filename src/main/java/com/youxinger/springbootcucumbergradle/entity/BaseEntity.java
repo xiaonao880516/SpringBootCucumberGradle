@@ -11,14 +11,6 @@ public class BaseEntity<Data> {
 
     protected IVerify<BaseEntity, Data> verify;
 
-    public IVerify getVerify() {
-        return verify;
-    }
-
-    public void setVerify(IVerify<BaseEntity, Data> verify) {
-        this.verify = verify;
-    }
-
     /**
      * 更新操作之前值
      */

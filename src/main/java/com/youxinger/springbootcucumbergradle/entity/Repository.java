@@ -2,6 +2,7 @@ package com.youxinger.springbootcucumbergradle.entity;
 
 import com.youxinger.springbootcucumbergradle.entity.verify.RepositoryVerify;
 import com.youxinger.springbootcucumbergradle.entity.verifydata.ProductVerifyData;
+import com.youxinger.springbootcucumbergradle.entity.verifydata.RepositoryVerifyData;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,6 +48,19 @@ public class Repository extends BaseEntity{
 
     public void setProductsBarcode(String[] productsBarcode) {
         this.productsBarcode = productsBarcode;
+    }
+
+    /**
+     * 设置要验证的条码预期值
+     * @param productVerifyData
+     */
+    public void setProductVerifyData(ProductVerifyData productVerifyData){
+        Object repositoryVerifyData = this.verify.getExpectedData();
+        if(repositoryVerifyData == null){
+            repositoryVerifyData = new RepositoryVerifyData();
+            this.verify.setExpectedData(repositoryVerifyData);
+        }
+        ((RepositoryVerifyData)repositoryVerifyData).getProductVerifyDataMap().put(productVerifyData.getBarcode(), productVerifyData);
     }
 
     @Override
