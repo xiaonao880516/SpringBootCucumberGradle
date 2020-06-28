@@ -12,7 +12,7 @@ public class Constants {
     public static final String WX_DOMAIN = "http://beta.lchmpapi.youxinger.net";
     public static final String PROVINCE_OPERATION_CENTER_NAME = "测试区域";
     public static final String PROVINCE_OPERATION_CENTER_NUMBER = "CESHI";
-    public static final String OPERATION_CENTER_NAME = "测试运营中心";
+    public static final String OPERATION_CENTER_NAME = "测试中心";
     public static final String OPERATION_CENTER_NUMBER = "CSYYZX";
 
     public static final String STORE_NAME = "测试门店";
@@ -20,10 +20,10 @@ public class Constants {
     public static final String STORE_REPO_ID = "CESHI-01";
 
 
-    public static final int PLATFORM_ID = 398;
+    public static final int PLATFORM_ID = 505134;
     public static final String PLATFORM_NAME = "测试平台";
 
-    public static final int EMPLOYEE_ID = 285;
+    public static final int EMPLOYEE_ID = 177;
     public static final String EMPLOYEE_NAME = "孟伟";
     public static final String EMPLOYEE_PHONE = "13810567325";
     public static final String EMPLOYEE_PASSWORD = "123456a";

@@ -6,13 +6,13 @@ package com.youxinger.springbootcucumbergradle.entity.verifydata;
  * @version 1.0
  */
 public class OperationCenterVerifyData {
-    private int salesSum = 0;  //运营中心销售额
+    private float salesSum = 0;  //运营中心销售额
 
-    public int getSalesSum() {
+    public float getSalesSum() {
         return salesSum;
     }
 
-    public void setSalesSum(int salesSum) {
+    public void setSalesSum(float salesSum) {
         this.salesSum = salesSum;
     }
 
