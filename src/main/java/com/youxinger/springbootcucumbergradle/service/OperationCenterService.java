@@ -35,10 +35,9 @@ public class OperationCenterService {
         Map<String ,String> params = new HashMap<>();
         params.put("page_size","15");
         params.put("page_num","1");
-        params.put("store_name","");
-        params.put("center_name",operationCenter.getName());
-        params.put("area_name","");
-        params.put("platform_name","");
+        params.put("store_id","");
+        params.put("center_id",operationCenter.getNumber());
+        params.put("employee","");
         params.put("area_id","");
         params.put("start_time", TimeUtil.getMonthStartTime());
         params.put("end_time",TimeUtil.getMonthEndTime());

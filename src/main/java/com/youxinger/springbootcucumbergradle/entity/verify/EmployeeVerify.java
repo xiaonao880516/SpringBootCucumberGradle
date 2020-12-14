@@ -30,12 +30,12 @@ public class EmployeeVerify extends AbstractVerify<Employee, EmployeeVerifyData>
     }
 
     @Override
-    public void updatePreVerifyData(Employee employee) {
+    public void updatePreVerifyDataSelf(Employee employee) {
         preVerifyData = employeeService.getVerifyData(employee);
     }
 
     @Override
-    public void updatePostVerifyData(Employee employee) {
+    public void updatePostVerifyDataSelf(Employee employee) {
         postVerifyData = employeeService.getVerifyData(employee);
     }
 }

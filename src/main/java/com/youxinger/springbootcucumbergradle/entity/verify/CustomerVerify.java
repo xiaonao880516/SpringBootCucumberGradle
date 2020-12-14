@@ -24,12 +24,12 @@ public class CustomerVerify extends AbstractVerify<Customer, CustomerVerifyData>
     }
 
     @Override
-    public void updatePreVerifyData(Customer customer) {
+    public void updatePreVerifyDataSelf(Customer customer) {
         preVerifyData = customerService.getVerifyData(customer);
     }
 
     @Override
-    public void updatePostVerifyData(Customer customer) {
+    public void updatePostVerifyDataSelf(Customer customer) {
         postVerifyData = customerService.getVerifyData(customer);
     }
 

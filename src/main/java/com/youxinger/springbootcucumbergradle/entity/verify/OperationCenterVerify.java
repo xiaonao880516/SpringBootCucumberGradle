@@ -30,12 +30,12 @@ public class OperationCenterVerify extends AbstractVerify<OperationCenter, Opera
     }
 
     @Override
-    public void updatePreVerifyData(OperationCenter entity) {
+    public void updatePreVerifyDataSelf(OperationCenter entity) {
         preVerifyData = operationCenterService.getVerifyData(entity);
     }
 
     @Override
-    public void updatePostVerifyData(OperationCenter entity) {
+    public void updatePostVerifyDataSelf(OperationCenter entity) {
         postVerifyData = operationCenterService.getVerifyData(entity);
     }
 }

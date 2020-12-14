@@ -1,6 +1,7 @@
 package com.youxinger.springbootcucumbergradle.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.youxinger.springbootcucumbergradle.bean.CustomerAddress;
 import com.youxinger.springbootcucumbergradle.entity.Customer;
 import com.youxinger.springbootcucumbergradle.entity.Employee;
 import com.youxinger.springbootcucumbergradle.entity.verifydata.CustomerVerifyData;
@@ -63,13 +64,19 @@ public class CustomerService {
                     .response();
             String memberNumber = response.path("data");
             customer.setMember_number(memberNumber);
+            createCustomerAddress(customer);
         }
     }
 
-    public void customerRecharge(int amount, Customer customer, Employee employee) {
+    /**
+     * 客户充值
+     * @param amount
+     * @param customer
+     */
+    public String customerRecharge(int amount, Customer customer) {
         if (customer == null || TextUtils.isEmpty(customer.getMember_number())) {
             fail("无效的客户");
-        } else if (employee == null) {
+        } else if (customer.getEmployee() == null) {
             fail("无效的员工,无法充值");
         } else {
             Map<String, Object> params = new HashMap<>();
@@ -80,33 +87,62 @@ public class CustomerService {
                     .params(params)
                     .request()
                     .header("Accept", "application/json, text/plain, */*")
-                    .header("tid", employee.getTid())
+                    .header("tid", customer.getEmployee().getTid())
                     .post(Constants.DOMAIN + "/frontStage/recharge/generate-order")
                     .then()
                     .statusCode(200)
                     .body("msg", equalTo("充值订单创建成功"))
                     .extract().response();
 
-            String rechargeOrderId = response.path("data");
-            rechargeOrderPay(rechargeOrderId);
+            return response.path("data");
         }
+        return null;
     }
 
     /**
-     * 充值订单付款
-     *
-     * @param rechargeOrderId 充值订单号
+     * 创建客户收回信息
+     * @param customer
      */
-    private void rechargeOrderPay(String rechargeOrderId) {
-        given()
-                .param("order_id", rechargeOrderId)
-                .request()
+    private void createCustomerAddress(Customer customer){
+        Map<String, String> addressParams = new HashMap<>();
+        addressParams.put("address",customer.getAddress());
+        addressParams.put("area",customer.getArea());
+        addressParams.put("city",customer.getCity());
+        addressParams.put("consignee",customer.getConsignee());
+        addressParams.put("consignee_phone",customer.getPhone());
+        addressParams.put("is_default","1");
+        addressParams.put("member_number",customer.getMember_number());
+        addressParams.put("province",customer.getProvince());
+
+        Response response = given()
                 .header("Accept", "application/json, text/plain, */*")
-                .post(Constants.DOMAIN + "/frontStage/recharge/ceshi")
+                .header("Content-Type", "application/json;charset=UTF-8")
+                .header("tid", customer.getEmployee().getTid())
+                .contentType("application/json")
+                .body(JSONObject.toJSONString(addressParams))
+                .post(Constants.DOMAIN + "/frontStage/vip/address/create-address")
                 .then()
                 .statusCode(200)
-                .body("msg", equalTo("OK"));
+                .body("msg", equalTo("操作成功"))
+                .extract().response();
+
+        int addressId = response.path("data");
+        String addressIdStr = String.valueOf(addressId);
+        if(!TextUtils.isEmpty(addressIdStr)){
+            CustomerAddress customerAddress = new CustomerAddress();
+            customerAddress.setId(addressIdStr);
+            customerAddress.setAddress(customer.getAddress());
+            customerAddress.setArea(customer.getArea());
+            customerAddress.setCity(customer.getCity());
+            customerAddress.setConsignee(customer.getConsignee());
+            customerAddress.setConsignee_phone(customer.getPhone());
+            customerAddress.setMember_number(customer.getMember_number());
+            customerAddress.setProvince(customer.getProvince());
+            customer.setCustomerAddress(customerAddress);
+        }
+
     }
+
 
     public void customerDelete(Customer customer) {
         logger.debug("customerDelete");

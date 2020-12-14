@@ -1,6 +1,7 @@
 package com.youxinger.springbootcucumbergradle.entity.verify;
 
 import com.youxinger.springbootcucumbergradle.entity.BaseEntity;
+import com.youxinger.springbootcucumbergradle.entity.Customer;
 import org.junit.Assert;
 
 /**
@@ -24,8 +25,26 @@ public abstract class AbstractVerify<Entity extends BaseEntity<Data>, Data> impl
      */
     protected Data expectedData;
 
+    @Override
+    public void updatePreVerifyData(Entity entity) {
+        clear();
+        updatePreVerifyDataSelf(entity);
+    }
+
+    @Override
+    public void updatePostVerifyData(Entity entity) {
+        updatePostVerifyDataSelf(entity);
+    }
+
+    private void clear() {
+        preVerifyData = null;
+        postVerifyData = null;
+        expectedData = null;
+    }
+
     /**
      * 设置期待值
+     *
      * @param expectedData 期待值
      */
     public void setExpectedData(Data expectedData) {
@@ -58,5 +77,9 @@ public abstract class AbstractVerify<Entity extends BaseEntity<Data>, Data> impl
      * 具体的验证方法
      */
     protected abstract void verifyDataSelf();
+
+    protected abstract void updatePreVerifyDataSelf(Entity entity);
+
+    protected abstract void updatePostVerifyDataSelf(Entity entity);
 
 }

@@ -30,12 +30,12 @@ public class PlatformVerify extends AbstractVerify<Platform, PlatformVerifyData>
     }
 
     @Override
-    public void updatePreVerifyData(Platform entity) {
+    public void updatePreVerifyDataSelf(Platform entity) {
         preVerifyData = platformService.getVerifyData(entity);
     }
 
     @Override
-    public void updatePostVerifyData(Platform entity) {
+    public void updatePostVerifyDataSelf(Platform entity) {
         postVerifyData = platformService.getVerifyData(entity);
     }
 }

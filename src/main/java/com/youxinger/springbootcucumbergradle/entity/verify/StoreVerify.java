@@ -30,12 +30,12 @@ public class StoreVerify extends AbstractVerify<Store, StoreVerifyData> {
     }
 
     @Override
-    public void updatePreVerifyData(Store entity) {
+    public void updatePreVerifyDataSelf(Store entity) {
         preVerifyData = storeService.getVerifyData(entity);
     }
 
     @Override
-    public void updatePostVerifyData(Store entity) {
+    public void updatePostVerifyDataSelf(Store entity) {
         postVerifyData = storeService.getVerifyData(entity);
     }
 }

@@ -10,16 +10,12 @@ import org.springframework.test.context.ContextConfiguration;
 
 @RunWith(Cucumber.class)
 @SpringBootTest(classes = {SpringbootcucumbergradleApplication.class})
-@CucumberOptions(plugin = {"json:target/cucumber.json", "pretty"},
-        features = "src/test/resources",
-        tags = {"@lanchaoTest"},
-        monochrome = true,
-        format = {
+@CucumberOptions(plugin = {"json:target/cucumber.json", "pretty"}, features = "src/test/resources", tags = {"@testStoreRepository"}, format = {
         "html:target/html-report/",
         "json:target/json-report/dw.json"
 })
 @ContextConfiguration // 不加此注解，bean会注入不进去
-public class LanchaoTest {
+public class StoreRepositoryTest {
     static {
         RestAssured.registerParser("text/plain", Parser.JSON);
     }

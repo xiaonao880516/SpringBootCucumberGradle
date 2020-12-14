@@ -30,22 +30,29 @@ public class RepositoryVerify extends AbstractVerify<Repository, RepositoryVerif
         if (expectedData != null && expectedData.getProductVerifyDataMap() != null) {
             for (String barcode : expectedData.getProductVerifyDataMap().keySet()) {
                 ProductVerifyData expected = expectedData.getProductVerifyDataMap().get(barcode);
+                int preQuantity = 0;
                 ProductVerifyData pre = preVerifyData.getProductVerifyDataMap().get(barcode);
+                if(pre != null){
+                    preQuantity = pre.getQuantity();
+                }
+                int postQuantity = 0;
                 ProductVerifyData post = postVerifyData.getProductVerifyDataMap().get(barcode);
-                logger.info("post.getQuantity()={}", post.getQuantity());
-                logger.info("pre.getQuantity()={}", pre.getQuantity());
-                Assert.assertEquals("repository:"+ verifyName+"， 验证库存失败", expected.getQuantity(), post.getQuantity() - pre.getQuantity(), 0);
+                if(post != null){
+                    postQuantity = post.getQuantity();
+                }
+                logger.info("postQuantity={}, preQuantity={}", postQuantity, preQuantity);
+                Assert.assertEquals("repository:"+ verifyName+"， 验证库存失败", expected.getQuantity(), postQuantity - preQuantity, 0);
             }
         }
     }
 
     @Override
-    public void updatePreVerifyData(Repository entity) {
+    public void updatePreVerifyDataSelf(Repository entity) {
         preVerifyData = repositoryService.getVerifyData(entity);
     }
 
     @Override
-    public void updatePostVerifyData(Repository entity) {
+    public void updatePostVerifyDataSelf(Repository entity) {
         postVerifyData = repositoryService.getVerifyData(entity);
     }
 }

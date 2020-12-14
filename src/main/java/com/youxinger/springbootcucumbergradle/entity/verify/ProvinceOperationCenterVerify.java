@@ -30,12 +30,12 @@ public class ProvinceOperationCenterVerify extends AbstractVerify<ProvinceOperat
     }
 
     @Override
-    public void updatePreVerifyData(ProvinceOperationCenter entity) {
+    public void updatePreVerifyDataSelf(ProvinceOperationCenter entity) {
         preVerifyData = provinceOperationCenterService.getVerifyData(entity);
     }
 
     @Override
-    public void updatePostVerifyData(ProvinceOperationCenter entity) {
+    public void updatePostVerifyDataSelf(ProvinceOperationCenter entity) {
         postVerifyData = provinceOperationCenterService.getVerifyData(entity);
     }
 }

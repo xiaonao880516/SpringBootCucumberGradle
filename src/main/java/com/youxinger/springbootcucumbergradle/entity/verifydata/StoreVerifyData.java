@@ -12,7 +12,7 @@ public class StoreVerifyData {
     private float newVIPOrderRate = 0.0f;  //门店新会员成单率
     private int orderCount = 0;  //门店订单数
     private int refundCount = 0;  //门店退单数
-    private int salesSum = 0;  //门店销售总额
+    private float salesSum = 0.0f;  //门店销售总额
     private float salesRatio = 0.0f;  //门店销售完成比
     private int platSalesSum = 0;  // 门店平台销售总额
     private float platSalesRatio = 0.0f;  //门店平台销售业绩占比
@@ -65,11 +65,11 @@ public class StoreVerifyData {
         this.refundCount = refundCount;
     }
 
-    public int getSalesSum() {
+    public float getSalesSum() {
         return salesSum;
     }
 
-    public void setSalesSum(int salesSum) {
+    public void setSalesSum(float salesSum) {
         this.salesSum = salesSum;
     }
 

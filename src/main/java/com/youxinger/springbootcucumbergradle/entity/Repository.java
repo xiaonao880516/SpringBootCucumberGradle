@@ -5,8 +5,6 @@ import com.youxinger.springbootcucumbergradle.entity.verify.RepositoryVerify;
 import com.youxinger.springbootcucumbergradle.entity.verifydata.ProductVerifyData;
 import com.youxinger.springbootcucumbergradle.entity.verifydata.RepositoryVerifyData;
 
-import java.util.Arrays;
-
 /**
  * @author mengwei
  * 2020/5/27 18:26
@@ -16,12 +14,10 @@ public class Repository extends BaseEntity<RepositoryVerifyData>{
 
     private String name;//仓库名称
     private String id;
-    private String[] productsBarcode;//仓库的条码列表
 
-    public Repository(String id, String name, String[] productsBarcode) {
+    public Repository(String id, String name) {
         this.id = id;
         this.name = name;
-        this.productsBarcode = productsBarcode;
         RepositoryVerify repositoryVerify = new RepositoryVerify(name);
         this.verify = (IVerify)repositoryVerify;
     }
@@ -42,19 +38,12 @@ public class Repository extends BaseEntity<RepositoryVerifyData>{
         this.name = name;
     }
 
-    public String[] getProductsBarcode() {
-        return productsBarcode;
-    }
-
-    public void setProductsBarcode(String[] productsBarcode) {
-        this.productsBarcode = productsBarcode;
-    }
 
     /**
      * 设置要验证的条码预期值
      * @param productVerifyData
      */
-    public void setProductVerifyData(ProductVerifyData productVerifyData){
+    public void addProductVerifyData(ProductVerifyData productVerifyData){
         RepositoryVerifyData repositoryVerifyData = this.verify.getExpectedData();
         if(repositoryVerifyData == null){
             repositoryVerifyData = new RepositoryVerifyData();
@@ -68,7 +57,6 @@ public class Repository extends BaseEntity<RepositoryVerifyData>{
         return "Repository{" +
                 "id='" + id + '\'' +
                 "name='" + name + '\'' +
-                ", productsBarcode=" + Arrays.toString(productsBarcode) +
                 '}';
     }
 }

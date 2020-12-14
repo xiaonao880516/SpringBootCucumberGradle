@@ -4,7 +4,6 @@ import com.youxinger.springbootcucumbergradle.entity.*;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,8 +18,6 @@ public class DataManager {
     private Global global;
 
     private SystemUser systemUser;
-
-    private Map<String, Customer> customerMap = new HashMap<>();
 
     public Global getGlobal() {
         return global;
@@ -38,12 +35,16 @@ public class DataManager {
         this.systemUser = systemUser;
     }
 
+    public void putCustomer(Customer customer){
+        global.getCustomerMap().put(customer.getName(), customer);
+    }
+
     public Map<String, Customer> getCustomerMap() {
-        return customerMap;
+        return global.getCustomerMap();
     }
 
     public Customer getCustomerByName(String name) {
-        return customerMap.get(name);
+        return global.getCustomerMap().get(name);
     }
 
     public Platform getPlatformById(int id) {

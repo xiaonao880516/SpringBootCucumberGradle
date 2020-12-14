@@ -34,11 +34,10 @@ public class ProvinceOperationCenterService {
         Map<String ,String> params = new HashMap<>();
         params.put("page_size","15");
         params.put("page_num","1");
-        params.put("store_name","");
-        params.put("center_name","");
-        params.put("area_name",provinceOperationCenter.getName());
-        params.put("platform_name","");
-        params.put("area_id",provinceOperationCenter.getName());
+        params.put("store_id","");
+        params.put("center_id","");
+        params.put("area_id",provinceOperationCenter.getNumber());
+        params.put("employee","");
         params.put("start_time", TimeUtil.getMonthStartTime());
         params.put("end_time",TimeUtil.getMonthEndTime());
 

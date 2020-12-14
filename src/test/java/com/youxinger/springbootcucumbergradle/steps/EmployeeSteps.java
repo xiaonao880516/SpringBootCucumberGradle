@@ -15,7 +15,7 @@ import cucumber.api.java.zh_cn.那么;
  */
 public class EmployeeSteps extends BaseSteps {
 
-    @那么("^预期店长业绩增加(\\d+)元")
+    @那么("^预期店长业绩增加(0|[1-9][0-9]*|-[1-9][0-9]*)元")
     public void storeVerifyStep(int salesSum) throws Throwable {
         for (Employee employee : dataManager.getAllEmployees()) {
             EmployeeVerifyData employeeVerifyData = new EmployeeVerifyData();

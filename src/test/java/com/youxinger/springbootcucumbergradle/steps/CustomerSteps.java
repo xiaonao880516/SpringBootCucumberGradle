@@ -7,10 +7,12 @@ import com.youxinger.springbootcucumbergradle.entity.Platform;
 import com.youxinger.springbootcucumbergradle.entity.verifydata.CustomerVerifyData;
 import com.youxinger.springbootcucumbergradle.service.CustomerService;
 import com.youxinger.springbootcucumbergradle.service.OrderService;
+import com.youxinger.springbootcucumbergradle.service.PayService;
 import com.youxinger.springbootcucumbergradle.utils.CardUtil;
 import com.youxinger.springbootcucumbergradle.utils.Constants;
 import com.youxinger.springbootcucumbergradle.utils.RandomValue;
 import cucumber.api.java.zh_cn.假设;
+import cucumber.api.java.zh_cn.并且;
 import cucumber.api.java.zh_cn.当;
 import cucumber.api.java.zh_cn.那么;
 import org.slf4j.Logger;
@@ -27,11 +29,13 @@ public class CustomerSteps extends BaseSteps {
     private static final Logger logger = LoggerFactory.getLogger(CustomerSteps.class);
 
     @Resource
-    private CustomerService customerService;
-
-    @Resource
     private OrderService orderService;
 
+    @Resource
+    private PayService payService;
+
+    @Resource
+    private CustomerService customerService;
 
     @假设("随机创建姓名为([^\"]+)的客户")
     public void customerCreateByName(String name) {
@@ -43,54 +47,78 @@ public class CustomerSteps extends BaseSteps {
         customer.setEmployee(employee);
         customer.setPlatform(platform);
         customerService.customerRegister(customer);
-        dataManager.getCustomerMap().put(name, customer);
-        customer.updatePreVerifyData();
+        dataManager.putCustomer(customer);
     }
 
     @当("^客户充值(\\d+)元$")
     public void customerRecharge(int money) throws Throwable {
         logger.debug("customerCreate, money={}", money);
-        for (String customerName : dataManager.getCustomerMap().keySet()) {
-            customerRechargeByCustomerName(customerName, money);
+        for (Customer customer : dataManager.getCustomerMap().values()) {
+            customerRecharge(customer, money);
         }
     }
 
     @当("^客户([^\"]+)充值(\\d+)元$")
     public void customerRechargeByCustomerName(String customerName, int money) throws Throwable {
         Customer customer = dataManager.getCustomerByName(customerName);
-        Employee employee = dataManager.getEmployeeById(Constants.EMPLOYEE_ID);
-        customerService.customerRecharge(money, customer, employee);
-        customer.updatePostVerifyData();
+        customerRecharge(customer, money);
     }
 
-    @那么("^预期客户的卡级别为([^\"]+),积分增加(\\d+),消费额增加(\\d+)元,余额增加(\\d+)元")
+    @当("^客户充值(\\d+)元并缓存数据$")
+    public void customerRechargeAndCacheData(int money) throws Throwable {
+        logger.debug("customerCreate, money={}", money);
+        cachePreVerifyData();
+        for (Customer customer : dataManager.getCustomerMap().values()) {
+            customerRecharge(customer, money);
+        }
+        cachePostVerifyData();
+    }
+
+    @当("^客户([^\"]+)充值(\\d+)元并缓存数据$")
+    public void customerRechargeByCustomerNameAndCacheData(String customerName, int money) throws Throwable {
+        cachePreVerifyData();
+        Customer customer = dataManager.getCustomerByName(customerName);
+        customerRecharge(customer, money);
+        cachePostVerifyData();
+    }
+
+    private void customerRecharge(Customer customer, int money){
+        String rechargeOrderId = customerService.customerRecharge(money, customer);
+        String amount = String.valueOf(money) + "00";
+        payService.posOrderPay(rechargeOrderId, amount);
+    }
+
+    @那么("^预期客户的卡级别为([^\"]+),积分增加(0|[1-9][0-9]*|-[1-9][0-9]*),消费额增加(0|[1-9][0-9]*|-[1-9][0-9]*)元,余额增加(0|[1-9][0-9]*|-[1-9][0-9]*)元")
     public void customerDataVerify(String cardLevel, int swapScore, int consumption, int balance) throws Throwable {
         for (String customerName : dataManager.getCustomerMap().keySet()) {
             customerDataVerifyByCustomerName(customerName, cardLevel, swapScore, consumption, balance);
         }
     }
 
-    @那么("^预期客户([^\"]+)的卡级别为([^\"]+),积分增加(\\d+),消费额增加(\\d+)元,余额增加(\\d+)元")
+    @那么("^预期客户([^\"]+)的卡级别为([^\"]+),积分增加(0|[1-9][0-9]*|-[1-9][0-9]*),消费额增加(0|[1-9][0-9]*|-[1-9][0-9]*)元,余额增加(0|[1-9][0-9]*|-[1-9][0-9]*)元")
     public void customerDataVerifyByCustomerName(String customerName, String cardLevel, int swapScore, int consumption, int balance) throws Throwable {
         CustomerVerifyData expectedData = new CustomerVerifyData(consumption, swapScore, CardUtil.getCardLevel(cardLevel), balance);
         Customer customer = dataManager.getCustomerByName(customerName);
         customer.setExpectedData(expectedData);
     }
 
-    @当("^客户下单买入商品([^\"]+)， 总仓(\\d+)个，门店(\\d+)个，([^\"]*)支付方式$")
-    public void customerBuy(String barcode, int quantity, int storeQuantity, String payType) throws Throwable {
-        for (String customerName : dataManager.getCustomerMap().keySet()) {
-            customerBuy(customerName, barcode, quantity, storeQuantity, payType);
+    @并且("^客户取消订单$")
+    public void cancelRechargeOrder() {
+        for (Customer customer : dataManager.getCustomerMap().values()) {
+            if (customer.getOrderInfo() != null) {
+                orderService.cancelOrder(customer, customer.getOrderInfo().getOrderId());
+            }
         }
     }
 
-    @当("^客户([^\"]+)下单买入商品([^\"]+)， 总仓(\\d+)个，门店(\\d+)个，([^\"]*)支付方式$")
-    public void customerBuy(String customerName, String barcode, int quantity, int storeQuantity, String payType) throws Throwable {
-        logger.debug("buy, barcode={}, quantity={}, storeQuantity={}, payType={}", barcode, quantity, storeQuantity, payType);
-        Customer customer = dataManager.getCustomerByName(customerName);
-        orderService.posOrder(customer);
-        customer.updatePostVerifyData();
-        dataManager.getGlobal().updatePostVerifyData();
-
+    @并且("^客户取消订单并缓存数据$")
+    public void cancelRechargeOrderAndCacheData() throws Throwable {
+        cachePreVerifyData();
+        for (Customer customer : dataManager.getCustomerMap().values()) {
+            if (customer.getOrderInfo() != null) {
+                orderService.cancelOrder(customer, customer.getOrderInfo().getOrderId());
+            }
+        }
+        cachePostVerifyData();
     }
 }

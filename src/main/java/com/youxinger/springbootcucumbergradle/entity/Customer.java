@@ -1,6 +1,7 @@
 package com.youxinger.springbootcucumbergradle.entity;
 
-import com.youxinger.springbootcucumbergradle.entity.verify.AbstractVerify;
+import com.youxinger.springbootcucumbergradle.bean.CustomerAddress;
+import com.youxinger.springbootcucumbergradle.bean.OrderInfo;
 import com.youxinger.springbootcucumbergradle.entity.verify.CustomerVerify;
 import com.youxinger.springbootcucumbergradle.entity.verify.IVerify;
 import com.youxinger.springbootcucumbergradle.entity.verifydata.CustomerVerifyData;
@@ -27,6 +28,8 @@ public class Customer extends BaseEntity<CustomerVerifyData>{
     private Employee employee = null;  //会员专属顾问
     private Platform platform = null;  //会员所属平台
     private Store store = null;//会员所属门店
+    private CustomerAddress customerAddress;//会员收货信息
+    private OrderInfo orderInfo; //会员订单信息
 
     public Customer(String name, String phone) {
         this.name = name;
@@ -36,7 +39,7 @@ public class Customer extends BaseEntity<CustomerVerifyData>{
         this.openid = "customer" + phone;
         this.address = "林河大街17号";
         this.area = "顺义区";
-        this.city = "北京";
+        this.city = "北京市";
         this.province = "北京市";
         this.consignee = name;
         CustomerVerify customerVerify = new CustomerVerify(name);
@@ -154,6 +157,22 @@ public class Customer extends BaseEntity<CustomerVerifyData>{
 
     public void setStore(Store store) {
         this.store = store;
+    }
+
+    public CustomerAddress getCustomerAddress() {
+        return customerAddress;
+    }
+
+    public void setCustomerAddress(CustomerAddress customerAddress) {
+        this.customerAddress = customerAddress;
+    }
+
+    public OrderInfo getOrderInfo() {
+        return orderInfo;
+    }
+
+    public void setOrderInfo(OrderInfo orderInfo) {
+        this.orderInfo = orderInfo;
     }
 
     @Override

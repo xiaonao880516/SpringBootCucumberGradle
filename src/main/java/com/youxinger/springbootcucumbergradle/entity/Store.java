@@ -3,7 +3,6 @@ package com.youxinger.springbootcucumbergradle.entity;
 import com.youxinger.springbootcucumbergradle.entity.verify.IVerify;
 import com.youxinger.springbootcucumbergradle.entity.verify.StoreVerify;
 import com.youxinger.springbootcucumbergradle.entity.verifydata.StoreVerifyData;
-import com.youxinger.springbootcucumbergradle.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,14 +16,16 @@ public class Store extends BaseEntity<StoreVerifyData> {
 
     private String name;//门店名称
     private String number;//门店编号
-    private Repository repository;//门店仓库
+    private Repository originalRepository;//门店原始仓库
+    private Repository standardRepository;//门店标准仓库
     private List<Platform> platformList = new ArrayList<>();
     private List<Employee> employeeList = new ArrayList<>();
 
-    public Store(String name, String number, String repoId) {
+    public Store(String name, String number, String originalRepoId, String standardRepoId) {
         this.name = name;
         this.number = number;
-        this.repository = new Repository(repoId, name, Constants.PRODUCTS_BARCODE);
+        this.originalRepository = new Repository(originalRepoId, name+"原始仓");
+        this.standardRepository = new Repository(standardRepoId, name+"标准仓");
         StoreVerify storeVerify = new StoreVerify(name);
         this.verify = (IVerify)storeVerify;
     }
@@ -45,12 +46,20 @@ public class Store extends BaseEntity<StoreVerifyData> {
         this.number = number;
     }
 
-    public Repository getRepository() {
-        return repository;
+    public Repository getOriginalRepository() {
+        return originalRepository;
     }
 
-    public void setRepository(Repository repository) {
-        this.repository = repository;
+    public void setOriginalRepository(Repository originalRepository) {
+        this.originalRepository = originalRepository;
+    }
+
+    public Repository getStandardRepository() {
+        return standardRepository;
+    }
+
+    public void setStandardRepository(Repository standardRepository) {
+        this.standardRepository = standardRepository;
     }
 
     public List<Platform> getPlatformList() {
@@ -74,7 +83,8 @@ public class Store extends BaseEntity<StoreVerifyData> {
         return "Store{" +
                 "name='" + name + '\'' +
                 ", number='" + number + '\'' +
-                ", repository=" + repository +
+                ", originalRepository=" + originalRepository +
+                ", standardRepository=" + standardRepository +
                 ", platformList=" + platformList +
                 ", employeeList=" + employeeList +
                 '}';
@@ -88,7 +98,8 @@ public class Store extends BaseEntity<StoreVerifyData> {
         for (Employee employee : employeeList) {
             employee.updatePreVerifyData();
         }
-        repository.updatePreVerifyData();
+        originalRepository.updatePreVerifyData();
+        standardRepository.updatePreVerifyData();
     }
 
     @Override
@@ -99,7 +110,8 @@ public class Store extends BaseEntity<StoreVerifyData> {
         for (Employee employee : employeeList) {
             employee.updatePostVerifyData();
         }
-        repository.updatePostVerifyData();
+        originalRepository.updatePostVerifyData();
+        standardRepository.updatePostVerifyData();
     }
 
     @Override
@@ -110,6 +122,7 @@ public class Store extends BaseEntity<StoreVerifyData> {
         for (Employee employee : employeeList) {
             employee.verifyData();
         }
-        repository.verifyData();
+        originalRepository.verifyData();
+        standardRepository.verifyData();
     }
 }

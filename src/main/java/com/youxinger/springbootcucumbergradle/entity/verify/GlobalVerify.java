@@ -30,12 +30,12 @@ public class GlobalVerify extends AbstractVerify<Global, GlobalVerifyData>{
     }
 
     @Override
-    public void updatePreVerifyData(Global entity) {
+    public void updatePreVerifyDataSelf(Global entity) {
         preVerifyData = globalService.getVerifyData(entity);
     }
 
     @Override
-    public void updatePostVerifyData(Global entity) {
+    public void updatePostVerifyDataSelf(Global entity) {
         postVerifyData = globalService.getVerifyData(entity);
     }
 }
